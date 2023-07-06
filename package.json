@@ -1,0 +1,10 @@
+{
+  "name": "call_of_cesar_bot",
+  "version": "1.0.0",
+  "type":"module",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "node-telegram-bot-api": "^0.61.0",
+    "sqlite3": "^5.1.6"
+  }
+}

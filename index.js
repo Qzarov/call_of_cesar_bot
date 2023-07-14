@@ -57,15 +57,47 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
         chat_id: msg.chat.id,
         message_id: msg.message_id,
         text_type: `caption`,
+        inline_message_id: callbackQuery.inline_message_id
     };
 
-    if (sender.action === tgMsgHandler.callbackData.START) {
-        tgMsgHandler.answerInlineStart(sender.id, sender.username)
-    } else if (sender.action === tgMsgHandler.callbackData.ADD_KARMA) {
-        const karma = 10;
-        tgMsgHandler.answerInlineAddKarma(sender.id, karma)
-    } else if (sender.action === tgMsgHandler.callbackData.GESAR_PART1) {
+    console.log()
+
+    if (sender.action === tgMsgHandler.callbackData
+        .GESAR_EPOS) {
+        tgMsgHandler.answerGesarEpos(opts.chat_id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .ZOV_DOBRA) {
+        tgMsgHandler.answerAboutZovDobra(opts.chat_id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .BACK_TO_START) {
+        tgMsgHandler.answerInlineBackToStart(opts.chat_id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .BACK_TO_START_HARD) {
+        tgMsgHandler.answerInlineBackToStartHard(opts.chat_id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .START_QUEST) {
+        tgMsgHandler.answerInlineStartQuest(opts.chat_id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .BECOMING) {
+        tgMsgHandler.answerInlineBecoming(opts.chat_id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .BACK_TO_QUEST_START) {
+        tgMsgHandler.answerInlineBackToQuestStart(sender.id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART1) {
         tgMsgHandler.answerInlinePart1(sender.id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .ADD_KARMA) {
+        const karma = 10;
+        tgMsgHandler.answerInlineAddKarma(callback_id, sender.id, karma)
     }
 
 });

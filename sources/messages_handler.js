@@ -1,6 +1,7 @@
 import {
     START_PIC, // BATTLE_SONG_PIC_ID
     BECOMING_AUDIO, GREETING_MESSAGE, BECOMING_AUDIO_MESSAGE,
+    PART1_1_PIC, PART1_1_TEXT, PART1_2_PIC, PART1_2_1_TEXT, PART1_2_2_TEXT
 } from "./const.js"
 import fs from "fs";
 
@@ -21,7 +22,10 @@ export class MessagesHandler {
         BACK_TO_START_HARD: "back_to_start_hard",
         BECOMING:           "becoming",
         BACK_TO_QUEST_START: "back_to_quest_start",
-        GESAR_PART1:        "gesar_part1"
+        GESAR_PART1_1:        "gesar_part1_1",
+        GESAR_PART1_2_1:        "gesar_part1_2_1",
+        GESAR_PART1_2_2:        "gesar_part1_2_2",
+        GESAR_PART1_3:        "gesar_part1_3",
     }
 
     start_menu_buttons = [
@@ -39,7 +43,7 @@ export class MessagesHandler {
             {text: `Гэсэр. Становление`, callback_data: this.callbackData.BECOMING},
         ],
         [
-            {text: `Путь Героя`, callback_data: this.callbackData.GESAR_PART1},
+            {text: `Путь Героя`, callback_data: this.callbackData.GESAR_PART1_1},
         ],
         [
             {text: `Назад`, callback_data: this.callbackData.BACK_TO_START_HARD},
@@ -161,6 +165,9 @@ export class MessagesHandler {
     answerInlineBecoming(chatId, messageId) {
         const buttons = [
             [
+                {text: `Путь Героя`, callback_data: this.callbackData.GESAR_PART1_1},
+            ],
+            [
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_QUEST_START},
             ]
         ]
@@ -190,25 +197,78 @@ export class MessagesHandler {
         }).then(r => r)
     }
 
-    answerInlineAddKarma(callback_d, chat_id, karma) {
-        this.addKarma(chat_id, karma)
-        let answer = `Мы начислили тебе ${karma} Karma. \n\n`;
-        this.bot.answerCallbackQuery(callback_d, {text: answer}).then(r => r)
-    }
-
-    answerInlinePart1(chatId) {
-        let answer = `Продолжение следует`;
+    answerInlinePart1_1(chatId, messageId) {
+        this.bot.deleteMessage(chatId, messageId).then(r => r)
         const buttons = [
             [
-                {text: `Путь героя`, callback_data: this.callbackData.ADD_KARMA},
-                {text: `Эпос "Гэсэр. Становление"`, callback_data: this.callbackData.GESAR_PART1},
+                {text: `Назад`, callback_data: this.callbackData.BACK_TO_QUEST_START},
+                {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+            ],
+            [
+                {text: `Что же случилось?`, callback_data: this.callbackData.GESAR_PART1_2_1},
             ]
         ]
-        this.bot.sendMessage(chatId, answer, {
+        const photo = fs.createReadStream(PART1_1_PIC)
+        this.bot.sendPhoto(chatId, photo, {
+            caption: PART1_1_TEXT,
+            parse_mode: `Markdown`,
             reply_markup: {
                 inline_keyboard: buttons
             }
         }).then(r => r)
+    }
+
+    answerInlinePart1_2_1(chatId, messageId) {
+        this.bot.deleteMessage(chatId, messageId).then(r => r)
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.BACK_TO_QUEST_START},
+                {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+            ],
+            [
+                {text: `Далее`, callback_data: this.callbackData.GESAR_PART1_2_2},
+            ]
+        ]
+        const photo = fs.createReadStream(PART1_2_PIC)
+        this.bot.sendPhoto(chatId, photo, {
+            caption: PART1_2_1_TEXT,
+            parse_mode: `Markdown`,
+            reply_markup: {
+                inline_keyboard: buttons
+            }
+        }).then(r => r)
+    }
+
+    answerInlinePart1_2_2(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_2_1},
+                {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+            ],
+            [
+                {text: `Что сделали небожители?`, callback_data: this.callbackData.GESAR_PART1_3},
+            ]
+        ]
+        const reply_markup = {
+            inline_keyboard: buttons
+        }
+        const message_id_spec = {
+            chat_id: chatId,
+            message_id: messageId
+        }
+
+        this.bot.editMessageReplyMarkup(reply_markup, message_id_spec).then(r => r)
+        this.bot.editMessageCaption(PART1_2_2_TEXT, message_id_spec).then(r => r)
+    }
+
+    answerInlinePart1_3(chatId, messageId) {
+
+    }
+
+    answerInlineAddKarma(callback_d, chat_id, karma) {
+        this.addKarma(chat_id, karma)
+        let answer = `Мы начислили тебе ${karma} Karma. \n\n`;
+        this.bot.answerCallbackQuery(callback_d, {text: answer}).then(r => r)
     }
 
     addKarma(chatId, karma) {

@@ -91,8 +91,20 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
         tgMsgHandler.answerInlineBackToQuestStart(sender.id, opts.message_id)
 
     } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1) {
-        tgMsgHandler.answerInlinePart1(sender.id)
+        .GESAR_PART1_1) {
+        tgMsgHandler.answerInlinePart1_1(sender.id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART1_2_1) {
+        tgMsgHandler.answerInlinePart1_2_1(sender.id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART1_2_2) {
+        tgMsgHandler.answerInlinePart1_2_2(sender.id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART1_3) {
+        tgMsgHandler.answerInlinePart1_3(sender.id, opts.message_id)
 
     } else if (sender.action === tgMsgHandler.callbackData
         .ADD_KARMA) {

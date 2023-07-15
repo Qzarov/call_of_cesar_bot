@@ -1,7 +1,16 @@
 import {
     START_PIC, // BATTLE_SONG_PIC_ID
-    BECOMING_AUDIO, GREETING_MESSAGE, BECOMING_AUDIO_MESSAGE,
-    PART1_1_PIC, PART1_1_TEXT, PART1_2_PIC, PART1_2_1_TEXT, PART1_2_2_TEXT, PART1_3_PIC, PART1_3_TEXT, ARSALAN_FRONT
+    BECOMING_AUDIO,
+    GREETING_MESSAGE,
+    BECOMING_AUDIO_MESSAGE,
+    PART1_1_PIC,
+    PART1_1_TEXT,
+    PART1_2_PIC,
+    PART1_2_1_TEXT,
+    PART1_2_2_TEXT,
+    PART1_3_PIC,
+    PART1_3_TEXT,
+    ARSALAN_FRONT, START_TEXT,
 } from "./const.js"
 import fs from "fs";
 
@@ -62,15 +71,7 @@ export class MessagesHandler {
 
         this.db.addUser(chatId, username, (is_new_user) => {});
 
-        let answer = `Добро пожаловать в квест-бот о приключениях бурятского богатыря Гэсэра! 🎉`;
-        const photo = fs.createReadStream(START_PIC)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: answer,
-            parse_mode: `HTML`,
-            reply_markup: {
-                inline_keyboard: this.start_menu_buttons
-            }
-        }).then();
+        this.sendPhoto(chatId, START_PIC, this.start_menu_buttons, START_TEXT)
     }
 
     answerGesarEpos(chatId, messageId) {
@@ -93,14 +94,7 @@ export class MessagesHandler {
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_START}
             ]
         ]
-        const reply_markup = {
-            inline_keyboard: buttons
-        }
-        const message_id_spec = {
-            chat_id: chatId,
-            message_id: messageId
-        }
-        this.bot.editMessageReplyMarkup(reply_markup, message_id_spec).then(r => r)
+        this.editReplyMarkupOnly(chatId, messageId, buttons)
     }
 
     answerAboutZovDobra(chatId, messageId) {
@@ -116,57 +110,19 @@ export class MessagesHandler {
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_START}
             ]
         ]
-        const reply_markup = {
-            inline_keyboard: buttons
-        }
-        const message_id_spec = {
-            chat_id: chatId,
-            message_id: messageId
-        }
-        this.bot.editMessageReplyMarkup(reply_markup, message_id_spec).then(r => r)
+        this.editReplyMarkupOnly(chatId, messageId, buttons)
     }
 
     answerInlineBackToStart(chatId, messageId) {
-        const reply_markup = {
-            inline_keyboard: this.start_menu_buttons
-        }
-        const message_id_spec = {
-            chat_id: chatId,
-            message_id: messageId
-        }
-        this.bot.editMessageReplyMarkup(reply_markup, message_id_spec).then(r => r)
+        this.editReplyMarkupOnly(chatId, messageId, this.start_menu_buttons)
     }
 
     answerInlineBackToStartHard(chatId, messageId) {
-        const reply_markup = {
-            inline_keyboard: this.start_menu_buttons
-        }
-        const message_id_spec = {
-            chat_id: chatId,
-            message_id: messageId
-        }
-        let answer = `Добро пожаловать в квест-бот о приключениях бурятского богатыря Гэсэра! 🎉`;
-
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
-        const photo = fs.createReadStream(START_PIC)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: answer,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: this.start_menu_buttons
-            }
-        }).then(r => r)
+        this.deleteAndSendPhoto(chatId, messageId, START_PIC, this.start_menu_buttons, START_TEXT)
     }
 
     answerInlineStartQuest(chatId, messageId) {
-        const message_id_spec = {
-            chat_id: chatId,
-            message_id: messageId,
-            reply_markup: {
-                inline_keyboard: this.quest_started_buttons
-            }
-        }
-        this.bot.editMessageCaption(GREETING_MESSAGE, message_id_spec).then(r => r)
+        this.deleteAndSendPhoto(chatId, messageId, START_PIC, this.quest_started_buttons, GREETING_MESSAGE)
     }
 
     answerInlineBecoming(chatId, messageId) {
@@ -178,34 +134,14 @@ export class MessagesHandler {
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_QUEST_START},
             ]
         ]
-
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
-
-        const audio = fs.createReadStream(BECOMING_AUDIO)
-        this.bot.sendAudio(chatId, audio, {
-            caption: BECOMING_AUDIO_MESSAGE,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
+        this.deleteAndSendAudio(chatId, messageId, BECOMING_AUDIO, buttons, BECOMING_AUDIO_MESSAGE)
     }
 
     answerInlineBackToQuestStart(chatId, messageId) {
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
-
-        const photo = fs.createReadStream(START_PIC)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: GREETING_MESSAGE,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: this.quest_started_buttons
-            }
-        }).then(r => r)
+        this.deleteAndSendPhoto(chatId, messageId, START_PIC, this.quest_started_buttons, GREETING_MESSAGE)
     }
 
     answerInlinePart1_1(chatId, messageId) {
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
         const buttons = [
             [
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_QUEST_START},
@@ -215,18 +151,10 @@ export class MessagesHandler {
                 {text: `Что же случилось?`, callback_data: this.callbackData.GESAR_PART1_2_1},
             ]
         ]
-        const photo = fs.createReadStream(PART1_1_PIC)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: PART1_1_TEXT,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
+        this.deleteAndSendPhoto(chatId, messageId, PART1_1_PIC, buttons, PART1_1_TEXT)
     }
 
     answerInlinePart1_2_1(chatId, messageId) {
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
         const buttons = [
             [
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_QUEST_START},
@@ -236,14 +164,7 @@ export class MessagesHandler {
                 {text: `Далее`, callback_data: this.callbackData.GESAR_PART1_2_2},
             ]
         ]
-        const photo = fs.createReadStream(PART1_2_PIC)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: PART1_2_1_TEXT,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
+        this.deleteAndSendPhoto(chatId, messageId, PART1_2_PIC, buttons, PART1_2_1_TEXT)
     }
 
     answerInlinePart1_2_2(chatId, messageId) {
@@ -256,20 +177,10 @@ export class MessagesHandler {
                 {text: `Что сделали небожители?`, callback_data: this.callbackData.GESAR_PART1_3},
             ]
         ]
-        const reply_markup = {
-            inline_keyboard: buttons
-        }
-        const message_id_spec = {
-            chat_id: chatId,
-            message_id: messageId
-        }
-
-        this.bot.editMessageReplyMarkup(reply_markup, message_id_spec).then(r => r)
-        this.bot.editMessageCaption(PART1_2_2_TEXT, message_id_spec).then(r => r)
+        this.editReplyMarkupAndCaption(chatId, messageId, buttons, PART1_2_2_TEXT)
     }
 
     answerInlinePart1_3(chatId, messageId) {
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
         const buttons = [
             [
                 {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_2_1},
@@ -282,18 +193,10 @@ export class MessagesHandler {
                 {text: `Вперед!`, callback_data: this.callbackData.GESAR_PART1_TEST_0},
             ]
         ]
-        const photo = fs.createReadStream(PART1_3_PIC)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: PART1_3_TEXT,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
+        this.deleteAndSendPhoto(chatId, messageId, PART1_3_PIC, buttons, PART1_3_TEXT)
     }
 
     answerInlinePart1_TEST_0(chatId, messageId) {
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
         const buttons = [
             [
                 {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_3},
@@ -303,19 +206,12 @@ export class MessagesHandler {
                 {text: `Первый вопрос`, callback_data: this.callbackData.GESAR_PART1_TEST_1},
             ]
         ]
-        const answer = "_Давай проверим твою внимательность. Ответь правильно на два вопроса по Ветви 1 и получи +20 к своей Карме._"
-        const photo = fs.createReadStream(ARSALAN_FRONT)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: answer,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
+        const caption = "_Давай проверим твою внимательность. Ответь правильно на два вопроса " +
+            "по Ветви 1 и получи +20 к своей Карме._"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart1_TEST_1(chatId, messageId) {
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
         const buttons = [
             [
                 {text: `Крестьянином`, callback_data: this.callbackData.GESAR_PART1_TEST_no},
@@ -326,45 +222,30 @@ export class MessagesHandler {
                 {text: `Князем`, callback_data: this.callbackData.GESAR_PART1_TEST_no},
             ]
         ]
-        const answer = "Кем был главный герой, до того, как спустился на землю?"
-        const photo = fs.createReadStream(ARSALAN_FRONT)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: answer,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
+        const caption = "Кем был главный герой, до того, как спустился на землю?"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart1_TEST_no(callback_d) {
         let answer = `Ответ неправильный`;
-        this.bot.answerCallbackQuery(callback_d, {text: answer}).then(r => r)
+        this.answerCallback(callback_d, answer)
     }
 
     answerInlinePart1_TEST_1_yes(callback_d, chatId, messageId) {
-        let answer = `Правильно!`;
-        this.bot.answerCallbackQuery(callback_d, {text: answer}).then(r => r)
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
+        this.answerCallback(callback_d, `Правильно!`)
 
         const buttons = [
             [
                 {text: `Следующий вопрос`, callback_data: this.callbackData.GESAR_PART1_TEST_2},
             ]
         ]
-        answer = "Главный герой Гэсэр действительно был богатырем, который спустился на землю и показал всем, где раки зимуют"
-        const photo = fs.createReadStream(ARSALAN_FRONT)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: answer,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
+        const caption =
+            "Главный герой Гэсэр действительно был богатырем, который спустился на землю и показал " +
+            "всем, где раки зимуют"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart1_TEST_2(chatId, messageId) {
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
         const buttons = [
             [
                 {text: `Хан-Хурмас`, callback_data: this.callbackData.GESAR_PART1_TEST_no},
@@ -375,21 +256,13 @@ export class MessagesHandler {
                 {text: `Атай-Улан`, callback_data: this.callbackData.GESAR_PART1_TEST_no},
             ]
         ]
-        const answer = "Как звали верховного Тэнгрия, отца всех богов? "
-        const photo = fs.createReadStream(ARSALAN_FRONT)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: answer,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
+        const caption = "Как звали верховного Тэнгрия, отца всех богов? "
+
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
-    answerInlinePart1_TEST_2_yes(callback_d, chatId, messageId) {
-        let answer = `Правильно!`;
-        this.bot.answerCallbackQuery(callback_d, {text: answer}).then(r => r)
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
+    answerInlinePart1_TEST_2_yes(callbackId, chatId, messageId) {
+        this.answerCallback(callbackId, `Правильно!`)
 
         const buttons = [
             [
@@ -400,15 +273,8 @@ export class MessagesHandler {
                 {text: `Навстречу приключениям! (Ветвь 2)`, callback_data: this.callbackData.GESAR_PART1_TEST_2},
             ]
         ]
-        answer = "Верховного Тэнгрия действительно звали Эсэгэ-Малан, классный мужик"
-        const photo = fs.createReadStream(ARSALAN_FRONT)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: answer,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
+        const caption = "Верховного Тэнгрия действительно звали Эсэгэ-Малан, классный мужик"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart2_1(callback_d, chatId, messageId) {
@@ -423,6 +289,71 @@ export class MessagesHandler {
 
     addKarma(chatId, karma) {
         this.db.updateKarma(chatId, karma)
+    }
+
+    sendPhoto(chatId, photo_path, buttons, caption) {
+        const photo = fs.createReadStream(photo_path)
+        this.bot.sendPhoto(chatId, photo, {
+            caption: caption,
+            parse_mode: `Markdown`,
+            reply_markup: {
+                inline_keyboard: buttons
+            }
+        }).then(r => r)
+    }
+
+    deleteAndSendPhoto(chatId, messageId, photo_path, buttons, caption) {
+        this.bot.deleteMessage(chatId, messageId).then(r => r)
+
+        const photo = fs.createReadStream(photo_path)
+        this.bot.sendPhoto(chatId, photo, {
+            caption: caption,
+            parse_mode: `Markdown`,
+            reply_markup: {
+                inline_keyboard: buttons
+            }
+        }).then(r => r)
+    }
+
+    deleteAndSendAudio(chatId, messageId, audio_path, buttons, caption) {
+        this.bot.deleteMessage(chatId, messageId).then(r => r)
+
+        const audio = fs.createReadStream(audio_path)
+        this.bot.sendAudio(chatId, audio, {
+            caption: caption,
+            parse_mode: `Markdown`,
+            reply_markup: {
+                inline_keyboard: buttons
+            }
+        }).then(r => r)
+    }
+
+    editReplyMarkupOnly(chatId, messageId, buttons) {
+        const reply_markup = {
+            inline_keyboard: buttons
+        }
+        const message_id_spec = {
+            chat_id: chatId,
+            message_id: messageId
+        }
+        this.bot.editMessageReplyMarkup(reply_markup, message_id_spec).then(r => r)
+    }
+
+    editReplyMarkupAndCaption(chatId, messageId, buttons, caption) {
+        const reply_markup = {
+            inline_keyboard: buttons
+        }
+        const message_id_spec = {
+            chat_id: chatId,
+            message_id: messageId
+        }
+
+        this.bot.editMessageReplyMarkup(reply_markup, message_id_spec).then(r => r)
+        this.bot.editMessageCaption(caption, message_id_spec).then(r => r)
+    }
+
+    answerCallback(callbackId, message) {
+        this.bot.answerCallbackQuery(callbackId, {text: message}).then(r => r)
     }
 
     writeLog(file, message) {

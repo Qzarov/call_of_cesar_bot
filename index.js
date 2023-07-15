@@ -107,6 +107,34 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
         tgMsgHandler.answerInlinePart1_3(sender.id, opts.message_id)
 
     } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART1_TEST_0) {
+        tgMsgHandler.answerInlinePart1_TEST_0(sender.id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART1_TEST_1) {
+        tgMsgHandler.answerInlinePart1_TEST_1(sender.id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART1_TEST_no) {
+        tgMsgHandler.answerInlinePart1_TEST_no(sender.callback_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART1_TEST_1_yes) {
+        tgMsgHandler.answerInlinePart1_TEST_1_yes(sender.callback_id, sender.id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART1_TEST_2) {
+        tgMsgHandler.answerInlinePart1_TEST_2(sender.id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART1_TEST_2_yes) {
+        tgMsgHandler.answerInlinePart1_TEST_2_yes(sender.callback_id, sender.id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
+        .GESAR_PART2_1) {
+        tgMsgHandler.answerInlinePart2_1(sender.id, opts.message_id)
+
+    } else if (sender.action === tgMsgHandler.callbackData
         .ADD_KARMA) {
         const karma = 10;
         tgMsgHandler.answerInlineAddKarma(callback_id, sender.id, karma)

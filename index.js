@@ -2,7 +2,6 @@ import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 import {DataBase} from './sources/db.js'
 import {MessagesHandler} from './sources/messages_handler.js'
-
 dotenv.config()
 
 
@@ -62,82 +61,86 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
 
     console.log()
 
-    if (sender.action === tgMsgHandler.callbackData
-        .GESAR_EPOS) {
-        tgMsgHandler.answerGesarEpos(opts.chat_id, opts.message_id)
+    switch (sender.action) {
+        case tgMsgHandler.callbackData.GESAR_EPOS:
+            tgMsgHandler.answerGesarEpos(opts.chat_id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .ZOV_DOBRA) {
-        tgMsgHandler.answerAboutZovDobra(opts.chat_id, opts.message_id)
+        case tgMsgHandler.callbackData.ZOV_DOBRA:
+            tgMsgHandler.answerAboutZovDobra(opts.chat_id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .BACK_TO_START) {
-        tgMsgHandler.answerInlineBackToStart(opts.chat_id, opts.message_id)
+        case tgMsgHandler.callbackData.START_QUEST:
+            tgMsgHandler.answerInlineStartQuest(opts.chat_id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .BACK_TO_START_HARD) {
-        tgMsgHandler.answerInlineBackToStartHard(opts.chat_id, opts.message_id)
+        case tgMsgHandler.callbackData.GESAR_EPOS_DESCR:
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .START_QUEST) {
-        tgMsgHandler.answerInlineStartQuest(opts.chat_id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .BECOMING) {
-        tgMsgHandler.answerInlineBecoming(opts.chat_id, opts.message_id)
+        case tgMsgHandler.callbackData.BACK_TO_START:
+            tgMsgHandler.answerInlineBackToStart(opts.chat_id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .BACK_TO_QUEST_START) {
-        tgMsgHandler.answerInlineBackToQuestStart(sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.BACK_TO_START_HARD:
+            tgMsgHandler.answerInlineBackToStartHard(opts.chat_id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1_1) {
-        tgMsgHandler.answerInlinePart1_1(sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.BECOMING:
+            tgMsgHandler.answerInlineBecoming(opts.chat_id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1_2_1) {
-        tgMsgHandler.answerInlinePart1_2_1(sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.BACK_TO_QUEST_START:
+            tgMsgHandler.answerInlineBackToQuestStart(sender.id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1_2_2) {
-        tgMsgHandler.answerInlinePart1_2_2(sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.GESAR_PART1_1:
+            tgMsgHandler.answerInlinePart1_1(sender.id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1_3) {
-        tgMsgHandler.answerInlinePart1_3(sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.GESAR_PART1_2_1:
+            tgMsgHandler.answerInlinePart1_2_1(sender.id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1_TEST_0) {
-        tgMsgHandler.answerInlinePart1_TEST_0(sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.GESAR_PART1_2_2:
+            tgMsgHandler.answerInlinePart1_2_2(sender.id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1_TEST_1) {
-        tgMsgHandler.answerInlinePart1_TEST_1(sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.GESAR_PART1_3:
+            tgMsgHandler.answerInlinePart1_3(sender.id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1_TEST_no) {
-        tgMsgHandler.answerInlinePart1_TEST_no(sender.callback_id)
+        case tgMsgHandler.callbackData.GESAR_PART1_TEST_0:
+            tgMsgHandler.answerInlinePart1_TEST_0(sender.id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1_TEST_1_yes) {
-        tgMsgHandler.answerInlinePart1_TEST_1_yes(sender.callback_id, sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.GESAR_PART1_TEST_1:
+            tgMsgHandler.answerInlinePart1_TEST_1(sender.id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1_TEST_2) {
-        tgMsgHandler.answerInlinePart1_TEST_2(sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.GESAR_PART1_TEST_no:
+            tgMsgHandler.answerInlinePart1_TEST_no(sender.callback_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART1_TEST_2_yes) {
-        tgMsgHandler.answerInlinePart1_TEST_2_yes(sender.callback_id, sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.GESAR_PART1_TEST_1_yes:
+            tgMsgHandler.answerInlinePart1_TEST_1_yes(sender.callback_id, sender.id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .GESAR_PART2_1) {
-        tgMsgHandler.answerInlinePart2_1(sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.GESAR_PART1_TEST_2:
+            tgMsgHandler.answerInlinePart1_TEST_2(sender.id, opts.message_id)
+            break
 
-    } else if (sender.action === tgMsgHandler.callbackData
-        .ADD_KARMA) {
-        const karma = 10;
-        tgMsgHandler.answerInlineAddKarma(callback_id, sender.id, karma)
+        case tgMsgHandler.callbackData.GESAR_PART1_TEST_2_yes:
+            tgMsgHandler.answerInlinePart1_TEST_2_yes(sender.callback_id, sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_1:
+            tgMsgHandler.answerInlinePart2_1(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.ADD_KARMA:
+            const karma = 10;
+            tgMsgHandler.answerInlineAddKarma(callback_id, sender.id, karma)
+            break
     }
-
 });

@@ -1,5 +1,5 @@
 import {
-    START_PIC, // BATTLE_SONG_PIC_ID
+    START_PIC,
     BECOMING_AUDIO,
     GREETING_MESSAGE,
     BECOMING_AUDIO_MESSAGE,
@@ -10,7 +10,21 @@ import {
     PART1_2_2_TEXT,
     PART1_3_PIC,
     PART1_3_TEXT,
-    ARSALAN_FRONT, START_TEXT,
+    ARSALAN_FRONT,
+    START_TEXT,
+    PART2_1_2_TEXT,
+    PART2_1_PIC,
+    PART2_1_1_TEXT,
+    PART2_2_1_TEXT,
+    PART2_2_2_TEXT,
+    PART2_3_1_TEXT,
+    PART2_3_PIC,
+    PART2_2_PIC,
+    PART2_3_2_TEXT,
+    PART2_4_PIC,
+    PART2_4_1_TEXT,
+    PART2_4_2_TEXT,
+    TEST_QUERY_no, TEST_QUERY_yes,
 } from "./const.js"
 import fs from "fs";
 
@@ -31,6 +45,8 @@ export class MessagesHandler {
         BACK_TO_START_HARD:     "back_to_start_hard",
         BECOMING:               "becoming",
         BACK_TO_QUEST_START:    "back_to_quest_start",
+
+        // PART 1
         GESAR_PART1_1:          "gesar_part1_1",
         GESAR_PART1_2_1:        "gesar_part1_2_1",
         GESAR_PART1_2_2:        "gesar_part1_2_2",
@@ -41,7 +57,25 @@ export class MessagesHandler {
         GESAR_PART1_TEST_1_yes: "gesar_part1_test_1_yes",
         GESAR_PART1_TEST_2:     "gesar_part1_test_2",
         GESAR_PART1_TEST_2_yes: "gesar_part1_test_2_yes",
-        GESAR_PART2_1:           "gesar_part2_1",
+
+        // PART 2
+        GESAR_PART2_1_1:        "gesar_part2_1_1",
+        GESAR_PART2_1_2:        "gesar_part2_1_2",
+        GESAR_PART2_2_1:        "gesar_part2_2_1",
+        GESAR_PART2_2_2:        "gesar_part2_2_2",
+        GESAR_PART2_3_1:        "gesar_part2_3_1",
+        GESAR_PART2_3_2:        "gesar_part2_3_2",
+        GESAR_PART2_4_1:        "gesar_part2_4_1",
+        GESAR_PART2_4_2:        "gesar_part2_4_2",
+        GESAR_PART2_TEST_0:     "gesar_part2_test_0",
+        GESAR_PART2_TEST_1:     "gesar_part2_test_1",
+        GESAR_PART2_TEST_no:    "gesar_part2_test_no",
+        GESAR_PART2_TEST_1_yes: "gesar_part2_test_1_yes",
+        GESAR_PART2_TEST_2:     "gesar_part2_test_2",
+        GESAR_PART2_TEST_2_yes: "gesar_part2_test_2_yes",
+
+        // PART 3
+        GESAR_PART3_1_1:          "gesar_part3_1",
     }
 
     start_menu_buttons = [
@@ -65,6 +99,8 @@ export class MessagesHandler {
             {text: `Назад`, callback_data: this.callbackData.BACK_TO_START_HARD},
         ]
     ]
+
+    main_menu_button = {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD}
 
     handleStart(chatId, username) {
         this.writeLog('', `user ${username} id ${chatId} send command 'start'`);
@@ -145,7 +181,7 @@ export class MessagesHandler {
         const buttons = [
             [
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_QUEST_START},
-                {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+                this.main_menu_button
             ],
             [
                 {text: `Что же случилось?`, callback_data: this.callbackData.GESAR_PART1_2_1},
@@ -158,7 +194,7 @@ export class MessagesHandler {
         const buttons = [
             [
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_QUEST_START},
-                {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+                this.main_menu_button
             ],
             [
                 {text: `Далее`, callback_data: this.callbackData.GESAR_PART1_2_2},
@@ -171,7 +207,7 @@ export class MessagesHandler {
         const buttons = [
             [
                 {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_2_1},
-                {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+                this.main_menu_button
             ],
             [
                 {text: `Что сделали небожители?`, callback_data: this.callbackData.GESAR_PART1_3},
@@ -184,11 +220,8 @@ export class MessagesHandler {
         const buttons = [
             [
                 {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_2_1},
-                {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+                this.main_menu_button
             ],
-            // [
-            //     {text: `Видео Ветвь 1`, url: "https://www.youtube.com/watch?v=GtsAWH2FM0w"},
-            // ],
             [
                 {text: `Вперед!`, callback_data: this.callbackData.GESAR_PART1_TEST_0},
             ]
@@ -222,17 +255,16 @@ export class MessagesHandler {
                 {text: `Князем`, callback_data: this.callbackData.GESAR_PART1_TEST_no},
             ]
         ]
-        const caption = "Кем был главный герой, до того, как спустился на землю?"
+        const caption = "_Кем был главный герой, до того, как спустился на землю?_"
         this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart1_TEST_no(callback_d) {
-        let answer = `Ответ неправильный`;
-        this.answerCallback(callback_d, answer)
+        this.answerCallback(callback_d, TEST_QUERY_no)
     }
 
     answerInlinePart1_TEST_1_yes(callback_d, chatId, messageId) {
-        this.answerCallback(callback_d, `Правильно!`)
+        this.answerCallback(callback_d, TEST_QUERY_yes)
 
         const buttons = [
             [
@@ -240,8 +272,8 @@ export class MessagesHandler {
             ]
         ]
         const caption =
-            "Главный герой Гэсэр действительно был богатырем, который спустился на землю и показал " +
-            "всем, где раки зимуют"
+            "_Главный герой Гэсэр действительно был богатырем, который спустился на землю и показал " +
+            "всем, где раки зимуют_"
         this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
@@ -256,30 +288,234 @@ export class MessagesHandler {
                 {text: `Атай-Улан`, callback_data: this.callbackData.GESAR_PART1_TEST_no},
             ]
         ]
-        const caption = "Как звали верховного Тэнгрия, отца всех богов? "
+        const caption = "_Как звали верховного Тэнгрия, отца всех богов?_"
 
         this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart1_TEST_2_yes(callbackId, chatId, messageId) {
-        this.answerCallback(callbackId, `Правильно!`)
+        this.answerCallback(callbackId, TEST_QUERY_yes)
 
         const buttons = [
             [
                 {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_TEST_2},
-                {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+                this.main_menu_button
             ],
             [
-                {text: `Навстречу приключениям! (Ветвь 2)`, callback_data: this.callbackData.GESAR_PART1_TEST_2},
+                {text: `Видео-чтение о Ветви 1`, url: "https://www.youtube.com/watch?v=GtsAWH2FM0w"},
+            ],
+            [
+                {text: `Навстречу приключениям! (Ветвь 2)`, callback_data: this.callbackData.GESAR_PART2_1_1},
             ]
         ]
-        const caption = "Верховного Тэнгрия действительно звали Эсэгэ-Малан, классный мужик"
+        const caption = "_Отлично! Испытание по Ветви 1 пройдено, продолжай Путь Героя!_"
         this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
-    answerInlinePart2_1(callback_d, chatId, messageId) {
-
+    answerInlinePart2_1_1(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_TEST_2_yes},
+                this.main_menu_button
+            ],
+            [
+                {text: `Что было дальше?`, callback_data: this.callbackData.GESAR_PART2_1_2},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART2_1_PIC, buttons, PART2_1_1_TEXT)
     }
+
+    answerInlinePart2_1_2(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART2_1_1},
+                this.main_menu_button
+            ],
+            [
+                {text: `Дальше!`, callback_data: this.callbackData.GESAR_PART2_2_1},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART2_1_PIC, buttons, PART2_1_2_TEXT)
+    }
+
+    answerInlinePart2_2_1(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART2_1_2},
+                this.main_menu_button
+            ],
+            [
+                {text: `Дальше!`, callback_data: this.callbackData.GESAR_PART2_2_2},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART2_2_PIC, buttons, PART2_2_1_TEXT)
+    }
+
+    answerInlinePart2_2_2(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART2_2_1},
+                this.main_menu_button
+            ],
+            [
+                {text: `Дальше!`, callback_data: this.callbackData.GESAR_PART2_3_1},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART2_2_PIC, buttons, PART2_2_2_TEXT)
+    }
+
+    answerInlinePart2_3_1(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART2_2_2},
+                this.main_menu_button
+            ],
+            [
+                {text: `Тэнгрии услышали?`, callback_data: this.callbackData.GESAR_PART2_3_2},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART2_3_PIC, buttons, PART2_3_1_TEXT)
+    }
+
+    answerInlinePart2_3_2(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART2_3_1},
+                this.main_menu_button
+            ],
+            [
+                {text: `Что потом сделал Гэсэр?`, callback_data: this.callbackData.GESAR_PART2_4_1},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART2_3_PIC, buttons, PART2_3_2_TEXT)
+    }
+
+    answerInlinePart2_4_1(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART2_3_2},
+                this.main_menu_button
+            ],
+            [
+                {text: `Третья жена?!`, callback_data: this.callbackData.GESAR_PART2_4_2},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART2_4_PIC, buttons, PART2_4_1_TEXT)
+    }
+
+    answerInlinePart2_4_2(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART2_4_1},
+                this.main_menu_button
+            ],
+            [
+                {text: `Тоже хочу дворец...`, callback_data: this.callbackData.GESAR_PART2_TEST_0},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART2_4_PIC, buttons, PART2_4_2_TEXT)
+    }
+
+    answerInlinePart2_TEST_0(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_3},
+                {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+            ],
+            [
+                {text: `Первый вопрос`, callback_data: this.callbackData.GESAR_PART2_TEST_1},
+            ]
+        ]
+        const caption = "_На этом вторая ветвь подходит к концу, пора переходить к вопросам!_"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
+    }
+
+    answerInlinePart2_TEST_1(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Он родился крепышом`, callback_data: this.callbackData.GESAR_PART2_TEST_no},
+                {text: `В детстве был сопливым`, callback_data: this.callbackData.GESAR_PART2_TEST_1_yes},
+            ],
+            [
+                {text: `Из-за буйного нрава`, callback_data: this.callbackData.GESAR_PART2_TEST_no},
+                {text: `Был красивым`, callback_data: this.callbackData.GESAR_PART2_TEST_no},
+            ]
+        ]
+        const caption = "_Почему небесного богатыря Бухэ-Бэлигтэ, будущего Гэсэра, прозвали в детстве Нюсата-Нюргай?_"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
+    }
+
+    answerInlinePart2_TEST_no(callback_d) {
+        this.answerCallback(callback_d, TEST_QUERY_no)
+    }
+
+    answerInlinePart2_TEST_1_yes(callback_d, chatId, messageId) {
+        this.answerCallback(callback_d, TEST_QUERY_yes)
+
+        const buttons = [
+            [
+                {text: `Следующий вопрос`, callback_data: this.callbackData.GESAR_PART2_TEST_2},
+            ]
+        ]
+        const caption =
+            "_Это правда, богатырь Гэсэр в детстве был сопливым мальчиком!_"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
+    }
+
+    answerInlinePart2_TEST_2(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Для величия`, callback_data: this.callbackData.GESAR_PART2_TEST_2_yes},
+                {text: `Для истории`, callback_data: this.callbackData.GESAR_PART2_TEST_no},
+            ],
+            [
+                {text: `Для защиты`, callback_data: this.callbackData.GESAR_PART2_TEST_no},
+                {text: `Для славы`, callback_data: this.callbackData.GESAR_PART2_TEST_no},
+            ]
+        ]
+        const caption = "_Для чего Нюсата-Нюргай получил на горе Сумбэр имя Гэсэр?_" +
+            "\n" +
+            "Подсказка: _«Если внимателен ты был путник, то историю эту слышать ты должен был…»_"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
+    }
+
+    answerInlinePart2_TEST_2_yes(callback_d, chatId, messageId) {
+        this.answerCallback(callback_d, TEST_QUERY_yes)
+
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART2_TEST_0},
+                this.main_menu_button
+            ],
+            // [
+            //     {text: `Видео-чтение о Ветви 1`, url: "https://www.youtube.com/watch?v=GtsAWH2FM0w"},
+            // ],
+            [
+                {text: `Продолжить приключения! (Ветвь 3)`, callback_data: this.callbackData.GESAR_PART3_1_1},
+            ]
+        ]
+        const caption =
+            "_Отлично! Вместе с богатырём Гэсэром вы прошли испытание по Ветви 2, так держать!_"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
+    }
+
+    answerInlinePart3_1_1(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_TEST_2_yes},
+                this.main_menu_button
+            ],
+            [
+                {text: `Что было дальше?`, callback_data: this.callbackData.GESAR_PART2_1_2},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART2_1_PIC, buttons, PART2_1_1_TEXT)
+    }
+
+
+    /*
+    *   Service functions
+    */
 
     answerInlineAddKarma(callback_d, chat_id, karma) {
         this.addKarma(chat_id, karma)
@@ -290,6 +526,8 @@ export class MessagesHandler {
     addKarma(chatId, karma) {
         this.db.updateKarma(chatId, karma)
     }
+
+
 
     sendPhoto(chatId, photo_path, buttons, caption) {
         const photo = fs.createReadStream(photo_path)

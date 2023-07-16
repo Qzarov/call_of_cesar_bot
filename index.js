@@ -134,8 +134,64 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
             tgMsgHandler.answerInlinePart1_TEST_2_yes(sender.callback_id, sender.id, opts.message_id)
             break
 
-        case tgMsgHandler.callbackData.GESAR_PART2_1:
-            tgMsgHandler.answerInlinePart2_1(sender.id, opts.message_id)
+        case tgMsgHandler.callbackData.GESAR_PART2_1_1:
+            tgMsgHandler.answerInlinePart2_1_1(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_1_2:
+            tgMsgHandler.answerInlinePart2_1_2(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_2_1:
+            tgMsgHandler.answerInlinePart2_2_1(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_2_2:
+            tgMsgHandler.answerInlinePart2_2_2(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_3_1:
+            tgMsgHandler.answerInlinePart2_3_1(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_3_2:
+            tgMsgHandler.answerInlinePart2_3_2(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_4_1:
+            tgMsgHandler.answerInlinePart2_4_1(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_4_2:
+            tgMsgHandler.answerInlinePart2_4_2(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_TEST_0:
+            tgMsgHandler.answerInlinePart2_TEST_0(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_TEST_1:
+            tgMsgHandler.answerInlinePart2_TEST_1(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_TEST_1_yes:
+            tgMsgHandler.answerInlinePart2_TEST_1_yes(sender.callback_id, sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_TEST_no:
+            tgMsgHandler.answerInlinePart2_TEST_no(sender.callback_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_TEST_2:
+            tgMsgHandler.answerInlinePart2_TEST_2(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART2_TEST_2_yes:
+            tgMsgHandler.answerInlinePart2_TEST_2_yes(sender.callback_id, sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.GESAR_PART3_1_1:
+            tgMsgHandler.answerInlinePart3_1_1(sender.id, opts.message_id)
             break
 
         case tgMsgHandler.callbackData.ADD_KARMA:

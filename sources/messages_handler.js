@@ -24,7 +24,14 @@ import {
     PART2_4_PIC,
     PART2_4_1_TEXT,
     PART2_4_2_TEXT,
-    TEST_QUERY_no, TEST_QUERY_yes,
+    TEST_QUERY_no,
+    TEST_QUERY_yes,
+    PART3_1_PIC,
+    PART3_1_1_TEXT,
+    PART3_2_1_TEXT,
+    PART3_2_PIC,
+    PART3_2_2_TEXT,
+    PART3_3_PIC, PART3_3_1_TEXT, PART3_3_2_TEXT, PART3_3_3_TEXT, PART3_1_2_TEXT,
 } from "./const.js"
 import fs from "fs";
 
@@ -75,7 +82,22 @@ export class MessagesHandler {
         GESAR_PART2_TEST_2_yes: "gesar_part2_test_2_yes",
 
         // PART 3
-        GESAR_PART3_1_1:          "gesar_part3_1",
+        GESAR_PART3_1_1:        "gesar_part3_1_1",
+        GESAR_PART3_1_2:        "gesar_part3_1_2",
+        GESAR_PART3_2_1:        "gesar_part3_2_1",
+        GESAR_PART3_2_2:        "gesar_part3_2_2",
+        GESAR_PART3_3_1:        "gesar_part3_3_1",
+        GESAR_PART3_3_2:        "gesar_part3_3_2",
+        GESAR_PART3_3_3:        "gesar_part3_3_3",
+        GESAR_PART3_TEST_0:     "gesar_part3_test_0",
+        GESAR_PART3_TEST_1:     "gesar_part3_test_1",
+        GESAR_PART3_TEST_no:    "gesar_part3_test_no",
+        GESAR_PART3_TEST_1_yes: "gesar_part3_test_1_yes",
+        GESAR_PART3_TEST_2:     "gesar_part3_test_2",
+        GESAR_PART3_TEST_2_yes: "gesar_part3_test_2_yes",
+
+        // PART 4
+        GESAR_PART4_1_1:        "gesar_part4_1_1",
     }
 
     start_menu_buttons = [
@@ -298,7 +320,7 @@ export class MessagesHandler {
 
         const buttons = [
             [
-                {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_TEST_2},
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_TEST_0},
                 this.main_menu_button
             ],
             [
@@ -445,8 +467,8 @@ export class MessagesHandler {
         this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
-    answerInlinePart2_TEST_no(callback_d) {
-        this.answerCallback(callback_d, TEST_QUERY_no)
+    answerInlinePart2_TEST_no(callbackId) {
+        this.answerCallback(callbackId, TEST_QUERY_no)
     }
 
     answerInlinePart2_TEST_1_yes(callback_d, chatId, messageId) {
@@ -502,14 +524,177 @@ export class MessagesHandler {
     answerInlinePart3_1_1(chatId, messageId) {
         const buttons = [
             [
-                {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_TEST_2_yes},
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART2_TEST_2_yes},
                 this.main_menu_button
             ],
             [
-                {text: `Что было дальше?`, callback_data: this.callbackData.GESAR_PART2_1_2},
+                {text: `Что было дальше?`, callback_data: this.callbackData.GESAR_PART3_1_2},
             ],
         ]
-        this.deleteAndSendPhoto(chatId, messageId, PART2_1_PIC, buttons, PART2_1_1_TEXT)
+        this.deleteAndSendPhoto(chatId, messageId, PART3_1_PIC, buttons, PART3_1_1_TEXT)
+    }
+
+    answerInlinePart3_1_2(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART3_1_1},
+                this.main_menu_button
+            ],
+            [
+                {text: `Дальше!`, callback_data: this.callbackData.GESAR_PART3_2_1},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART3_1_PIC, buttons, PART3_1_2_TEXT)
+    }
+
+    answerInlinePart3_2_1(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART3_1_2},
+                this.main_menu_button
+            ],
+            [
+                {text: `Дальше!`, callback_data: this.callbackData.GESAR_PART3_2_2},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART3_2_PIC, buttons, PART3_2_1_TEXT)
+    }
+
+    answerInlinePart3_2_2(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART3_2_1},
+                this.main_menu_button
+            ],
+            [
+                {text: `Дальше!`, callback_data: this.callbackData.GESAR_PART3_3_1},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART3_2_PIC, buttons, PART3_2_2_TEXT)
+    }
+
+    answerInlinePart3_3_1(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART3_2_2},
+                this.main_menu_button
+            ],
+            [
+                {text: `Дальше!`, callback_data: this.callbackData.GESAR_PART3_3_2},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART3_3_PIC, buttons, PART3_3_1_TEXT)
+    }
+
+    answerInlinePart3_3_2(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART3_3_1},
+                this.main_menu_button
+            ],
+            [
+                {text: `Дальше!`, callback_data: this.callbackData.GESAR_PART3_3_3},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART3_3_PIC, buttons, PART3_3_2_TEXT)
+    }
+
+    answerInlinePart3_3_3(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART3_3_2},
+                this.main_menu_button
+            ],
+            [
+                {text: `Дальше!`, callback_data: this.callbackData.GESAR_PART3_TEST_0},
+            ],
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, PART3_3_PIC, buttons, PART3_3_3_TEXT)
+    }
+
+    answerInlinePart3_TEST_0(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_3},
+                {text: `Главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+            ],
+            [
+                {text: `Первый вопрос`, callback_data: this.callbackData.GESAR_PART3_TEST_1},
+            ]
+        ]
+        const caption = "_Вот мы и дошли до конца третьей ветви. Теперь традиционные вопросы!_"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
+    }
+
+    answerInlinePart3_TEST_1(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Туловище`, callback_data: this.callbackData.GESAR_PART3_TEST_no},
+                {text: `Голова`, callback_data: this.callbackData.GESAR_PART3_TEST_1_yes},
+            ],
+            [
+                {text: `Нога`, callback_data: this.callbackData.GESAR_PART3_TEST_no},
+                {text: `Рука`, callback_data: this.callbackData.GESAR_PART3_TEST_no},
+            ]
+        ]
+        const caption = "_Из какой части тела Атай-Улана появился злобный демон Архан-Шудхэр?_"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
+    }
+
+    answerInlinePart3_TEST_no(callbackId) {
+        this.answerCallback(callbackId, TEST_QUERY_no)
+    }
+
+    answerInlinePart3_TEST_1_yes(callbackId, chatId, messageId) {
+        this.answerCallback(callbackId, TEST_QUERY_yes)
+
+        const buttons = [
+            [
+                {text: `Следующий вопрос`, callback_data: this.callbackData.GESAR_PART3_TEST_2},
+            ]
+        ]
+        const caption =
+            "_Да! Демон Архан-Шудхэр появился из головы Атай-Улана!_"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
+    }
+
+    answerInlinePart3_TEST_2(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Завидовал силе Гэсэра`, callback_data: this.callbackData.GESAR_PART3_TEST_no},
+                {text: `Не мог простить обид`, callback_data: this.callbackData.GESAR_PART3_TEST_no},
+            ],
+            [
+                {text: `Из-за жажды золота`, callback_data: this.callbackData.GESAR_PART3_TEST_no},
+                {text: `Уведённые жёны`, callback_data: this.callbackData.GESAR_PART3_TEST_2_yes},
+            ]
+        ]
+        const caption = "_Почему дядя Гэсэра Хара-Зутан пошел на предательство и сговор с Архан-Шудхэром?_"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
+    }
+
+    answerInlinePart3_TEST_2_yes(callbackId, chatId, messageId) {
+        this.answerCallback(callbackId, TEST_QUERY_yes)
+
+        const buttons = [
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART3_TEST_0},
+                this.main_menu_button
+            ],
+            // [
+            //     {text: `Видео-чтение о Ветви 1`, url: "https://www.youtube.com/watch?v=GtsAWH2FM0w"},
+            // ],
+            [
+                {text: `Идем дальше! (Ветвь 4)`, callback_data: this.callbackData.GESAR_PART4_1_1},
+            ]
+        ]
+        const caption =
+            "_Бок о бок с Гэсэром вы прошли уже три ветви! Но приключения только начинаются!_"
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
+    }
+
+    answerInlinePart4_1_1(chatId, messageId) {
+
     }
 
 

@@ -112,10 +112,8 @@ export class MessagesHandler {
 
     quest_started_buttons = [
         [
-            {text: `Гэсэр. Становление`, callback_data: this.callbackData.BECOMING},
-        ],
-        [
             {text: `Путь Героя`, callback_data: this.callbackData.GESAR_PART1_1},
+            {text: `Гэсэр. Становление`, callback_data: this.callbackData.BECOMING},
         ],
         [
             {text: `Назад`, callback_data: this.callbackData.BACK_TO_START_HARD},
@@ -139,14 +137,14 @@ export class MessagesHandler {
                     url: "https://www.youtube.com/watch?v=Vz_XqIief0c&ab_channel=МояПланета"},
             ],
             [
-                {text: `Эпос Гэсэр. Запев`,
-                    url: "https://telegra.ph/EHPOS-GEHSEHR-ZAPEV-07-09"},
-                {text: `Об Эпосе`,
-                    url: "https://telegra.ph/BURYATSKIJ-GEROICHESKIJ-EHPOS-GEHSEHR-07-09"},
+                {text: `Эпос Гэсэр. Запев`, url: "https://telegra.ph/EHPOS-GEHSEHR-ZAPEV-07-09"},
+                {text: `Об Эпосе`, url: "https://telegra.ph/BURYATSKIJ-GEROICHESKIJ-EHPOS-GEHSEHR-07-09"},
             ],
             [
-                {text: `Книга`,
-                    url: "https://taplink.cc/zovgesera", callback_data: this.callbackData.ADD_KARMA},
+                {text: `Времён связующая нить`, url: "https://youtube.com/playlist?list=PLQc9jctpUJHv_U2b-jiehYYcOShZJzoxr"},
+            ],
+            [
+                {text: `Книга`, url: "https://taplink.cc/zovgesera", callback_data: this.callbackData.ADD_KARMA},
             ],
             [
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_START}
@@ -200,15 +198,10 @@ export class MessagesHandler {
     }
 
     answerInlinePart1_1(chatId, messageId) {
-        const buttons = [
-            [
-                {text: `Назад`, callback_data: this.callbackData.BACK_TO_QUEST_START},
-                this.main_menu_button
-            ],
-            [
-                {text: `Что же случилось?`, callback_data: this.callbackData.GESAR_PART1_2_1},
-            ]
-        ]
+        const buttons = this.getStoryButtons(
+            this.callbackData.BACK_TO_QUEST_START, `Назад`,
+            this.callbackData.GESAR_PART1_2_1, `Далее`
+        )
         this.deleteAndSendPhoto(chatId, messageId, PART1_1_PIC, buttons, PART1_1_TEXT)
     }
 
@@ -300,15 +293,15 @@ export class MessagesHandler {
 
         const buttons = [
             [
-                {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_TEST_0},
-                this.main_menu_button
+                {text: `Навстречу приключениям! (Ветвь 2)`, callback_data: this.callbackData.GESAR_PART2_1_1},
             ],
             [
                 {text: `Видео-чтение о Ветви 1`, url: "https://www.youtube.com/watch?v=GtsAWH2FM0w"},
             ],
             [
-                {text: `Навстречу приключениям! (Ветвь 2)`, callback_data: this.callbackData.GESAR_PART2_1_1},
-            ]
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART1_TEST_0},
+                this.main_menu_button
+            ],
         ]
         const caption = "_Отлично! Испытание по Ветви 1 пройдено, продолжай Путь Героя!_"
         this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
@@ -441,14 +434,11 @@ export class MessagesHandler {
 
         const buttons = [
             [
+                {text: `Продолжить приключения! (Ветвь 3)`, callback_data: this.callbackData.GESAR_PART3_1_1},
+            ],
+            [
                 {text: `Назад`, callback_data: this.callbackData.GESAR_PART2_TEST_0},
                 this.main_menu_button
-            ],
-            // [
-            //     {text: `Видео-чтение о Ветви 1`, url: "https://www.youtube.com/watch?v=GtsAWH2FM0w"},
-            // ],
-            [
-                {text: `Продолжить приключения! (Ветвь 3)`, callback_data: this.callbackData.GESAR_PART3_1_1},
             ]
         ]
         const caption =
@@ -602,11 +592,11 @@ export class MessagesHandler {
     getStoryButtons(prev_step, prev_step_text, next_step, next_step_text) {
         return [
             [
-                {text: prev_step_text, callback_data: prev_step},
-                this.main_menu_button
+                {text: next_step_text, callback_data: next_step},
             ],
             [
-                {text: next_step_text, callback_data: next_step},
+                {text: prev_step_text, callback_data: prev_step},
+                this.main_menu_button
             ]
         ]
     }

@@ -31,7 +31,7 @@ import {
     PART3_2_1_TEXT,
     PART3_2_PIC,
     PART3_2_2_TEXT,
-    PART3_3_PIC, PART3_3_1_TEXT, PART3_3_2_TEXT, PART3_3_3_TEXT, PART3_1_2_TEXT,
+    PART3_3_PIC, PART3_3_1_TEXT, PART3_3_2_TEXT, PART3_3_3_TEXT, PART3_1_2_TEXT, TABLE_OF_CONTENTS_TEXT,
 } from "./const.js"
 import fs from "fs";
 
@@ -45,12 +45,13 @@ export class MessagesHandler {
     callbackData = {
         GESAR_EPOS:             "gesar_epos",
         ZOV_DOBRA:              "zov_dobra",
+        TABLE_OF_CONTENTS:      "table_of_contents",
         START_QUEST:            "start_quest",
         ADD_KARMA:              "add_karma",
         GESAR_EPOS_DESCR:       "gesar_epos_descr",
+        BECOMING:               "becoming",
         BACK_TO_START:          "back_to_start",
         BACK_TO_START_HARD:     "back_to_start_hard",
-        BECOMING:               "becoming",
         BACK_TO_QUEST_START:    "back_to_quest_start",
 
         // PART 1
@@ -104,6 +105,9 @@ export class MessagesHandler {
         [
             {text: `Об эпосе Гэсэр`, callback_data: this.callbackData.GESAR_EPOS},
             {text: `О проекте "Зов Добра"`, callback_data: this.callbackData.ZOV_DOBRA},
+        ],
+        [
+            {text: `Оглавление`, callback_data: this.callbackData.TABLE_OF_CONTENTS},
         ],
         [
             {text: `Начать квест`, callback_data: this.callbackData.START_QUEST}
@@ -169,8 +173,37 @@ export class MessagesHandler {
         this.editReplyMarkupOnly(chatId, messageId, buttons)
     }
 
+    answerTableOfContents(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Ветвь 1`, callback_data: this.callbackData.GESAR_PART1_1},
+                {text: `Ветвь 2`, callback_data: this.callbackData.GESAR_PART2_1_1},
+            ],
+            [
+                {text: `Ветвь 3`, callback_data: this.callbackData.GESAR_PART3_1_1},
+                {text: `Ветвь 4`, callback_data: this.callbackData.GESAR_PART4_1_1},
+            ],
+            [
+                {text: `Ветвь 5`, url: "https://taplink.cc/zovgesera"},
+                {text: `Ветвь 6`, url: "https://taplink.cc/zovgesera"},
+            ],
+            [
+                {text: `Ветвь 7`, url: "https://taplink.cc/zovgesera"},
+                {text: `Ветвь 8`, url: "https://taplink.cc/zovgesera"},
+
+            ],
+            [
+                {text: `Ветвь 9`, url: "https://taplink.cc/zovgesera"},
+            ],
+            [
+                {text: `Назад`, callback_data: this.callbackData.BACK_TO_START}
+            ]
+        ]
+        this.editReplyMarkupAndCaption(chatId, messageId, buttons, TABLE_OF_CONTENTS_TEXT)
+    }
+
     answerInlineBackToStart(chatId, messageId) {
-        this.editReplyMarkupOnly(chatId, messageId, this.start_menu_buttons)
+        this.editReplyMarkupAndCaption(chatId, messageId, this.start_menu_buttons, START_TEXT)
     }
 
     answerInlineBackToStartHard(chatId, messageId) {

@@ -70,6 +70,10 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
             tgMsgHandler.answerAboutZovDobra(opts.chat_id, opts.message_id)
             break
 
+        case tgMsgHandler.callbackData.TABLE_OF_CONTENTS:
+            tgMsgHandler.answerTableOfContents(opts.chat_id, opts.message_id)
+            break
+
         case tgMsgHandler.callbackData.START_QUEST:
             tgMsgHandler.answerInlineStartQuest(opts.chat_id, opts.message_id)
             break

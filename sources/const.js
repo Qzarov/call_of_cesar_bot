@@ -1,4 +1,4 @@
-export const START_PIC = "./data/pic-gesar-start.jpg"
+export const START_PIC = "./data/pic_gesar_start.jpg"
 export const PART1_1_PIC = "./data/pic_part1_1.jpg"
 export const PART1_2_PIC = "./data/pic_part1_2.jpg"
 export const PART1_3_PIC = "./data/pic_part1_3.jpg"
@@ -9,7 +9,7 @@ export const PART2_4_PIC = "./data/pic_part2_4.jpg"
 export const PART3_1_PIC = "./data/pic_part3_1.jpg"
 export const PART3_2_PIC = "./data/pic_part3_2.jpg"
 export const PART3_3_PIC = "./data/pic_part3_3.jpg"
-export const ARSALAN_FRONT = "./data/arsalan_front.jpg"
+export const ARSALAN_FRONT = "./data/arsalan_front.png"
 export const BECOMING_AUDIO = "./data/Эпос Гэсэр. Становление.mp3"
 
 export const START_TEXT =
@@ -32,7 +32,28 @@ export const BECOMING_AUDIO_MESSAGE =
     "Настройся на Путь Героя, послушав историю о том, как Нюсата-Нюргай " +
     "из мальчишки стал настоящим богатырем Абай-Гэсэром."
 
-
+export const TABLE_OF_CONTENTS_TEXT =
+    `В этом разделе вы можете перейти к интересующей вас главе Эпоса "Гэсэр":` +
+    "\n" +
+    "1. Ветвь Первая: Истоки людских судеб.\n" +
+    // "\n" +
+    "2. Ветвь Вторая: Три царевны.\n" +
+    // "\n" +
+    "3. Ветвь Третья: О борьбе Гэсэра с дьяволом Арханом.\n" +
+    // "\n" +
+    "4. Ветвь Четвертая: О победе Гэсэра над Гал-Нурман Ханом.\n" +
+    // "\n" +
+    "5. Ветвь Пятая: Победа Гэсэра над чудовищем Орголи – хозяином тайги.\n" +
+    // "\n" +
+    "6. Ветвь Шестая: Гэсэр убивает чудовище Шэрэм-Мината.\n" +
+    // "\n" +
+    "7. Ветвь Седьмая: Как Гэсэр победил дьявола Абарга-Сэсэна.\n" +
+    // "\n" +
+    "8. Ветвь Восьмая: О победе Гэсэра над коварным Лойр-Лобсоголдоем.\n" +
+    // "\n" +
+    "9. Ветвь Девятая: .\n" +
+    "\n" +
+    "Для перехода нажмите на соответствующую кнопку."
 
 export const BATTLE_SONG1 =
     "_Тридцать стрел из колчанов_\n" +

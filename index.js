@@ -23,6 +23,7 @@ bot.on('text', async (msg) => {
         id: msg.from.id,
         username: msg.from.username,
     }
+    console.log(`@${from_user.username} прислал сообщение:\n ${text}`)
 
     if (!chat_id) {
         console.log('chat_id in msg is null');
@@ -36,6 +37,16 @@ bot.on('text', async (msg) => {
         if (command === '/start') {
             tgMsgHandler.handleStart(chat_id, from_user.username);
         }
+    } else if (text.toLowerCase().includes("отзыв")) {
+
+        const feedback = `@${from_user.username} прислал:\n ${text}`
+        await bot.sendMessage(process.env.REVIEW_GROUP_ID, feedback)
+
+        const answer = "Спасибо за ваш отзыв!"
+        await bot.sendMessage(from_user.id, answer)
+    } else {
+        const answer = "Я не понимаю вас 😢"
+        await bot.sendMessage(from_user.id, answer)
     }
 
 
@@ -247,7 +258,12 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
             break
 
         case tgMsgHandler.callbackData.GESAR_PART4_1_1:
-            tgMsgHandler.answerInlinePart4_1_1(sender.id, opts.message_id)
+            // tgMsgHandler.answerInlinePart4_1_1(sender.id, opts.message_id)
+            tgMsgHandler.answerInlineQuestEnd(sender.id, opts.message_id)
+            break
+
+        case tgMsgHandler.callbackData.QUEST_END:
+            tgMsgHandler.answerInlineQuestEnd(sender.id, opts.message_id)
             break
 
         case tgMsgHandler.callbackData.ADD_KARMA:

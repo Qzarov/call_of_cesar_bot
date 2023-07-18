@@ -31,7 +31,7 @@ import {
     PART3_2_1_TEXT,
     PART3_2_PIC,
     PART3_2_2_TEXT,
-    PART3_3_PIC, PART3_3_1_TEXT, PART3_3_2_TEXT, PART3_3_3_TEXT, PART3_1_2_TEXT, TABLE_OF_CONTENTS_TEXT,
+    PART3_3_PIC, PART3_3_1_TEXT, PART3_3_2_TEXT, PART3_3_3_TEXT, PART3_1_2_TEXT, TABLE_OF_CONTENTS_TEXT, QUEST_END,
 } from "./const.js"
 import fs from "fs";
 
@@ -53,6 +53,7 @@ export class MessagesHandler {
         BACK_TO_START:          "back_to_start",
         BACK_TO_START_HARD:     "back_to_start_hard",
         BACK_TO_QUEST_START:    "back_to_quest_start",
+        QUEST_END:              "quest_end",
 
         // PART 1
         GESAR_PART1_1:          "gesar_part1_1",
@@ -142,13 +143,13 @@ export class MessagesHandler {
             ],
             [
                 {text: `Эпос Гэсэр. Запев`, url: "https://telegra.ph/EHPOS-GEHSEHR-ZAPEV-07-09"},
-                {text: `Об Эпосе`, url: "https://telegra.ph/BURYATSKIJ-GEROICHESKIJ-EHPOS-GEHSEHR-07-09"},
+                {text: `Описание`, url: "https://telegra.ph/BURYATSKIJ-GEROICHESKIJ-EHPOS-GEHSEHR-07-09"},
             ],
             [
                 {text: `Времён связующая нить`, url: "https://youtube.com/playlist?list=PLQc9jctpUJHv_U2b-jiehYYcOShZJzoxr"},
             ],
             [
-                {text: `Книга`, url: "https://taplink.cc/zovgesera", callback_data: this.callbackData.ADD_KARMA},
+                {text: `Собрание изданий`, url: "https://taplink.cc/zovgesera", callback_data: this.callbackData.ADD_KARMA},
             ],
             [
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_START}
@@ -164,7 +165,7 @@ export class MessagesHandler {
             ],
             [
                 {text: `Чат сообщества`, url: "https://t.me/agregator_zovdobra"},
-                {text: `Бот проекта`, url: "https://t.me/ZovDobraBot"},
+                {text: `Бот Добра`, url: "https://t.me/ZovDobraBot"},
             ],
             [
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_START}
@@ -267,8 +268,8 @@ export class MessagesHandler {
             this.callbackData.GESAR_PART1_3, `Назад`,
             this.callbackData.GESAR_PART1_TEST_1, `Первый вопрос`
         )
-        const caption = "_Давай проверим твою внимательность. Ответь правильно на два вопроса " +
-            "по Ветви 1 и получи +20 к своей Карме._"
+        const caption = "_Давай проверим твою внимательность. Ответь на два вопроса " +
+            "по Ветви 1._"
         this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
@@ -300,8 +301,8 @@ export class MessagesHandler {
             ]
         ]
         const caption =
-            "_Главный герой Гэсэр действительно был богатырем, который спустился на землю и показал " +
-            "всем, где раки зимуют_"
+            "_Главный герой Гэсэр действительно был богатырем, который спустился " +
+            "на землю, чтобы спасти людей от злых сил._"
         this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
@@ -351,7 +352,7 @@ export class MessagesHandler {
     answerInlinePart2_1_2(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART2_1_1, `Назад`,
-            this.callbackData.GESAR_PART2_2_1, `Дальше!`
+            this.callbackData.GESAR_PART2_2_1, `В гости к Саргалу`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART2_1_PIC, buttons, PART2_1_2_TEXT)
     }
@@ -359,7 +360,7 @@ export class MessagesHandler {
     answerInlinePart2_2_1(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART2_1_2, `Назад`,
-            this.callbackData.GESAR_PART2_2_2, `Дальше!`
+            this.callbackData.GESAR_PART2_2_2, `На состязания!`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART2_2_PIC, buttons, PART2_2_1_TEXT)
     }
@@ -367,7 +368,7 @@ export class MessagesHandler {
     answerInlinePart2_2_2(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART2_2_1, `Назад`,
-            this.callbackData.GESAR_PART2_3_1, `Дальше!`
+            this.callbackData.GESAR_PART2_3_1, `За второй женой!`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART2_2_PIC, buttons, PART2_2_2_TEXT)
     }
@@ -406,7 +407,7 @@ export class MessagesHandler {
 
     answerInlinePart2_TEST_0(chatId, messageId) {
         const buttons = this.getStoryButtons(
-            this.callbackData.GESAR_PART1_3, `Назад`,
+            this.callbackData.GESAR_PART2_4_1, `Назад`,
             this.callbackData.GESAR_PART2_TEST_1, `Первый вопрос`
         )
         const caption = "_На этом вторая ветвь подходит к концу, пора переходить к вопросам!_"
@@ -458,7 +459,7 @@ export class MessagesHandler {
         ]
         const caption = "_Для чего Нюсата-Нюргай получил на горе Сумбэр имя Гэсэр?_" +
             "\n" +
-            "Подсказка: _«Если внимателен ты был путник, то историю эту слышать ты должен был…»_"
+            "Подсказка: _«Если внимателен ты был путник, то историю эту услышать ты должен был…»_"
         this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
@@ -490,7 +491,7 @@ export class MessagesHandler {
     answerInlinePart3_1_2(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART3_1_1, `Назад`,
-            this.callbackData.GESAR_PART3_2_1, `Дальше!`
+            this.callbackData.GESAR_PART3_2_1, `На совет Тэнгриев`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART3_1_PIC, buttons, PART3_1_2_TEXT)
     }
@@ -498,7 +499,7 @@ export class MessagesHandler {
     answerInlinePart3_2_1(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART3_1_2, `Назад`,
-            this.callbackData.GESAR_PART3_2_2, `Дальше!`
+            this.callbackData.GESAR_PART3_2_2, `Подлый Архан!`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART3_2_PIC, buttons, PART3_2_1_TEXT)
     }
@@ -506,7 +507,7 @@ export class MessagesHandler {
     answerInlinePart3_2_2(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART3_2_1, `Назад`,
-            this.callbackData.GESAR_PART3_3_1, `Дальше!`
+            this.callbackData.GESAR_PART3_3_1, `Что стало с Арханом?`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART3_2_PIC, buttons, PART3_2_2_TEXT)
     }
@@ -514,7 +515,7 @@ export class MessagesHandler {
     answerInlinePart3_3_1(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART3_2_2, `Назад`,
-            this.callbackData.GESAR_PART3_3_2, `Дальше!`
+            this.callbackData.GESAR_PART3_3_2, `Что сделал Архан-Шудхэр?`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART3_3_PIC, buttons, PART3_3_1_TEXT)
     }
@@ -607,16 +608,32 @@ export class MessagesHandler {
 
     }
 
+    answerInlineQuestEnd(chatId, messageId) {
+        const buttons = [
+            [
+                {text: `Зов Добра`, url: "https://t.me/agregator_zovdobra/39"},
+                {text: `Песня о Гэсэре`, url: "https://www.youtube.com/watch?v=uBJpeLkFKJ8"},
+            ],
+            [
+                {text: `Назад`, callback_data: this.callbackData.GESAR_PART3_TEST_2_yes},
+                {text: `В главное меню`, callback_data: this.callbackData.BACK_TO_START_HARD},
+            ]
+        ]
+        this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, QUEST_END)
+    }
 
-    /*
-    *   Service functions
-    */
+
 
     answerInlineAddKarma(callback_d, chat_id, karma) {
         this.addKarma(chat_id, karma)
         let answer = `Мы начислили тебе ${karma} Karma. \n\n`;
         this.bot.answerCallbackQuery(callback_d, {text: answer}).then(r => r)
     }
+
+
+    /*
+    *   Service functions
+    */
 
     addKarma(chatId, karma) {
         this.db.updateKarma(chatId, karma)

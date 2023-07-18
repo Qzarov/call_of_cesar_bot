@@ -45,7 +45,7 @@ import {
     PART4_2_PIC,
     PART4_3_PIC,
     PART4_3_1_TEXT,
-    PART4_3_2_TEXT, PART4_4_1_TEXT, PART4_4_PIC, PART4_2_2_TEXT, PART4_4_2_TEXT, ABOUT_EPOS,
+    PART4_3_2_TEXT, PART4_4_1_TEXT, PART4_4_PIC, PART4_2_2_TEXT, PART4_4_2_TEXT, ABOUT_EPOS, ABOUT_ZOV_DOBRA,
 } from "./const.js"
 import fs from "fs";
 
@@ -198,7 +198,7 @@ export class MessagesHandler {
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_START}
             ]
         ]
-        this.editReplyMarkupOnly(chatId, messageId, buttons)
+        this.editReplyMarkupAndCaption(chatId, messageId, buttons, ABOUT_ZOV_DOBRA)
     }
 
     answerTableOfContents(chatId, messageId) {

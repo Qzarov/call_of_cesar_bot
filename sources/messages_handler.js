@@ -45,7 +45,7 @@ import {
     PART4_2_PIC,
     PART4_3_PIC,
     PART4_3_1_TEXT,
-    PART4_3_2_TEXT, PART4_4_1_TEXT, PART4_4_PIC, PART4_2_2_TEXT, PART4_4_2_TEXT,
+    PART4_3_2_TEXT, PART4_4_1_TEXT, PART4_4_PIC, PART4_2_2_TEXT, PART4_4_2_TEXT, ABOUT_EPOS,
 } from "./const.js"
 import fs from "fs";
 
@@ -182,7 +182,7 @@ export class MessagesHandler {
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_START}
             ]
         ]
-        this.editReplyMarkupOnly(chatId, messageId, buttons)
+        this.editReplyMarkupAndCaption(chatId, messageId, buttons, ABOUT_EPOS)
     }
 
     answerAboutZovDobra(chatId, messageId) {
@@ -212,16 +212,16 @@ export class MessagesHandler {
                 {text: `Ветвь 4`, callback_data: this.callbackData.GESAR_PART4_1_1},
             ],
             [
-                {text: `Ветвь 5`, url: "https://taplink.cc/zovgesera"},
-                {text: `Ветвь 6`, url: "https://taplink.cc/zovgesera"},
+                {text: `Ветвь 5`, url: "https://telegra.ph/Vetv-pyataya-Pobeda-Gehsehra-nad-chudovishchem-Orgoli--hozyainom-tajgi-07-18"},
+                {text: `Ветвь 6`, url: "https://telegra.ph/Vetv-shestaya-Gehsehr-ubivaet-chudovishche-SHehrehm-Minata-07-18"},
             ],
             [
-                {text: `Ветвь 7`, url: "https://taplink.cc/zovgesera"},
-                {text: `Ветвь 8`, url: "https://taplink.cc/zovgesera"},
+                {text: `Ветвь 7`, url: "https://telegra.ph/Vetv-sedmaya-Kak-Gehsehr-pobedil-dyavola-Abarga-Sehsehna-07-18"},
+                {text: `Ветвь 8`, url: "https://telegra.ph/Vetv-vosmaya-O-pobede-Gehsehra-nad-kovarnym-Lojr-Lobsogoldoem-07-18"},
 
             ],
             [
-                {text: `Ветвь 9`, url: "https://taplink.cc/zovgesera"},
+                {text: `Ветвь 9 (появится позднее)`, callback_data: this.callbackData.BACK_TO_START},
             ],
             [
                 {text: `Назад`, callback_data: this.callbackData.BACK_TO_START}
@@ -634,7 +634,7 @@ export class MessagesHandler {
     answerInlinePart4_1_1(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART3_TEST_0, `Назад`,
-            this.callbackData.GESAR_PART4_1_2, `Дальше!`
+            this.callbackData.GESAR_PART4_1_2, `Что было дальше?`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART4_1_PIC, buttons, PART4_1_1_TEXT)
     }
@@ -642,7 +642,7 @@ export class MessagesHandler {
     answerInlinePart4_1_2(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART4_1_1, `Назад`,
-            this.callbackData.GESAR_PART4_2_1, `Дальше!`
+            this.callbackData.GESAR_PART4_2_1, `Они отправились в поход?`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART4_1_PIC, buttons, PART4_1_2_TEXT)
     }
@@ -650,7 +650,7 @@ export class MessagesHandler {
     answerInlinePart4_2_1(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART4_1_2, `Назад`,
-            this.callbackData.GESAR_PART4_2_2, `Дальше!`
+            this.callbackData.GESAR_PART4_2_2, `Началось сражение?`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART4_2_PIC, buttons, PART4_2_1_TEXT)
     }
@@ -658,7 +658,7 @@ export class MessagesHandler {
     answerInlinePart4_2_2(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART4_2_1, `Назад`,
-            this.callbackData.GESAR_PART4_3_1, `Дальше!`
+            this.callbackData.GESAR_PART4_3_1, `Гал-Нурман сдался?`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART4_2_PIC, buttons, PART4_2_2_TEXT)
     }
@@ -666,7 +666,7 @@ export class MessagesHandler {
     answerInlinePart4_3_1(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART4_2_2, `Назад`,
-            this.callbackData.GESAR_PART4_3_2, `Дальше!`
+            this.callbackData.GESAR_PART4_3_2, `Неужели он проиграл?`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART4_3_PIC, buttons, PART4_3_1_TEXT)
     }
@@ -674,7 +674,7 @@ export class MessagesHandler {
     answerInlinePart4_3_2(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART4_3_1, `Назад`,
-            this.callbackData.GESAR_PART4_4_1, `Дальше!`
+            this.callbackData.GESAR_PART4_4_1, `Они успели помочь?`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART4_3_PIC, buttons, PART4_3_2_TEXT)
     }
@@ -682,7 +682,7 @@ export class MessagesHandler {
     answerInlinePart4_4_1(chatId, messageId) {
         const buttons = this.getStoryButtons(
             this.callbackData.GESAR_PART4_3_2, `Назад`,
-            this.callbackData.GESAR_PART4_4_2, `Дальше!`
+            this.callbackData.GESAR_PART4_4_2, `Победа!`
         )
         this.deleteAndSendPhoto(chatId, messageId, PART4_4_PIC, buttons, PART4_4_1_TEXT)
     }
@@ -732,7 +732,7 @@ export class MessagesHandler {
             ]
         ]
         const caption =
-            "__"
+            "_Абсолютно точно! В распоряжении Гал-Нурмана  было десять тысяч коварств, три тысячи превращений и тридцать три тысячи разрушений._"
         this.deleteAndSendPhoto(chatId, messageId, ARSALAN_FRONT, buttons, caption)
     }
 
@@ -858,6 +858,7 @@ export class MessagesHandler {
             inline_keyboard: buttons
         }
         const message_id_spec = {
+            parse_mode: `Markdown`,
             chat_id: chatId,
             message_id: messageId
         }

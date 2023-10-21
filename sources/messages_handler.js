@@ -2,7 +2,7 @@ import { text } from "./consts/text.js"
 import { pictures, audio } from "./consts/media.js"
 import { callbackData } from "./consts/callbackData.js"
 import { BotUtils } from "./botUtils.js"
-
+import { buttons } from "./consts/buttons.js"
 
 
 export class MessagesHandler {
@@ -11,117 +11,35 @@ export class MessagesHandler {
         this.db = db;
     }
 
-    start_menu_buttons = [
-        [
-            {text: `Об эпосе Гэсэр`, callback_data: callbackData.GESAR_EPOS},
-            {text: `О проекте "Зов Добра"`, callback_data: callbackData.ZOV_DOBRA},
-        ],
-        [
-            {text: `Оглавление`, callback_data: callbackData.TABLE_OF_CONTENTS},
-        ],
-        [
-            {text: `Начать квест`, callback_data: callbackData.START_QUEST}
-        ]
-    ]
-
-    quest_started_buttons = [
-        [
-            {text: `Путь Героя`, callback_data: callbackData.GESAR_PART1_1},
-            {text: `Гэсэр. Становление`, callback_data: callbackData.BECOMING},
-        ],
-        [
-            {text: `Назад`, callback_data: callbackData.BACK_TO_START_HARD},
-        ]
-    ]
-
-    main_menu_button = {text: `Главное меню`, callback_data: callbackData.BACK_TO_START_HARD}
-
     handleStart(chatId, username) {
         this.writeLog('', `user ${username} id ${chatId} send command 'start'`);
 
         this.db.addUser(chatId, username, (is_new_user) => {});
-
-        this.sendPhoto(chatId, pictures.START_PIC, this.start_menu_buttons, text.START_TEXT)
+        this.bot.sendPhoto(chatId, pictures.START_PIC, buttons.start_menu_buttons, text.START_TEXT)
     }
 
     answerGesarEpos(chatId, messageId) {
-        const buttons = [
-            [
-                {text: `Видео "Земля Героев. Гэсэр."`,
-                    url: "https://www.youtube.com/watch?v=Vz_XqIief0c&ab_channel=МояПланета"},
-            ],
-            [
-                {text: `Эпос Гэсэр. Запев`, url: "https://telegra.ph/EHPOS-GEHSEHR-ZAPEV-07-09"},
-                {text: `Описание`, url: "https://telegra.ph/BURYATSKIJ-GEROICHESKIJ-EHPOS-GEHSEHR-07-09"},
-            ],
-            [
-                {text: `Времён связующая нить`, url: "https://youtube.com/playlist?list=PLQc9jctpUJHv_U2b-jiehYYcOShZJzoxr"},
-            ],
-            [
-                {text: `Собрание изданий`, url: "https://taplink.cc/zovgesera", callback_data: callbackData.ADD_KARMA},
-            ],
-            [
-                {text: `Назад`, callback_data: callbackData.BACK_TO_START}
-            ]
-        ]
-        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons, text.ABOUT_EPOS)
+        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons.answer_gesar_epos, text.ABOUT_EPOS)
     }
 
     answerAboutZovDobra(chatId, messageId) {
-        const buttons = [
-            [
-                {text: `Видео о проекте`, url: "https://www.youtube.com/watch?v=QrXqdpT5z_4"},
-            ],
-            [
-                {text: `Чат сообщества`, url: "https://t.me/agregator_zovdobra"},
-                {text: `Бот Добра`, url: "https://t.me/ZovDobraBot"},
-            ],
-            [
-                {text: `Назад`, callback_data: callbackData.BACK_TO_START}
-            ]
-        ]
-        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons, text.ABOUT_ZOV_DOBRA)
+        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons.about_zov_dobra, text.ABOUT_ZOV_DOBRA)
     }
 
     answerTableOfContents(chatId, messageId) {
-        const buttons = [
-            [
-                {text: `Ветвь 1`, callback_data: callbackData.GESAR_PART1_1},
-                {text: `Ветвь 2`, callback_data: callbackData.GESAR_PART2_1_1},
-            ],
-            [
-                {text: `Ветвь 3`, callback_data: callbackData.GESAR_PART3_1_1},
-                {text: `Ветвь 4`, callback_data: callbackData.GESAR_PART4_1_1},
-            ],
-            [
-                {text: `Ветвь 5`, url: "https://telegra.ph/Vetv-pyataya-Pobeda-Gehsehra-nad-chudovishchem-Orgoli--hozyainom-tajgi-07-18"},
-                {text: `Ветвь 6`, url: "https://telegra.ph/Vetv-shestaya-Gehsehr-ubivaet-chudovishche-SHehrehm-Minata-07-18"},
-            ],
-            [
-                {text: `Ветвь 7`, url: "https://telegra.ph/Vetv-sedmaya-Kak-Gehsehr-pobedil-dyavola-Abarga-Sehsehna-07-18"},
-                {text: `Ветвь 8`, url: "https://telegra.ph/Vetv-vosmaya-O-pobede-Gehsehra-nad-kovarnym-Lojr-Lobsogoldoem-07-18"},
-
-            ],
-            [
-                {text: `Ветвь 9 (появится позднее)`, callback_data: callbackData.BACK_TO_START},
-            ],
-            [
-                {text: `Назад`, callback_data: callbackData.BACK_TO_START}
-            ]
-        ]
-        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons, text.TABLE_OF_CONTENTS_TEXT)
+        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons.table_of_contents, text.TABLE_OF_CONTENTS_TEXT)
     }
 
     answerInlineBackToStart(chatId, messageId) {
-        this.bot.editReplyMarkupAndCaption(chatId, messageId, this.start_menu_buttons, text.START_TEXT)
+        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons.start_menu_buttons, text.START_TEXT)
     }
 
     answerInlineBackToStartHard(chatId, messageId) {
-        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, this.start_menu_buttons, text.START_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, buttons.start_menu_buttons, text.START_TEXT)
     }
 
     answerInlineStartQuest(chatId, messageId) {
-        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, this.quest_started_buttons, text.GREETING_MESSAGE)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, buttons.quest_started_buttons, text.GREETING_MESSAGE)
     }
 
     answerInlineBecoming(chatId, messageId) {
@@ -137,7 +55,7 @@ export class MessagesHandler {
     }
 
     answerInlineBackToQuestStart(chatId, messageId) {
-        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, this.quest_started_buttons, text.GREETING_MESSAGE)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, buttons.quest_started_buttons, text.GREETING_MESSAGE)
     }
 
     answerInlinePart1_1(chatId, messageId) {
@@ -243,7 +161,7 @@ export class MessagesHandler {
             ],
             [
                 {text: `Назад`, callback_data: callbackData.GESAR_PART1_TEST_0},
-                this.main_menu_button
+                buttons.main_menu_button
             ],
         ]
         const caption = "_Отлично! Испытание по Ветви 1 пройдено, продолжай Путь Героя!_"
@@ -381,7 +299,7 @@ export class MessagesHandler {
             ],
             [
                 {text: `Назад`, callback_data: callbackData.GESAR_PART2_TEST_0},
-                this.main_menu_button
+                buttons.main_menu_button
             ]
         ]
         const caption =
@@ -682,7 +600,7 @@ export class MessagesHandler {
             ],
             [
                 {text: prev_step_text, callback_data: prev_step},
-                this.main_menu_button
+                buttons.main_menu_button
             ]
         ]
     }

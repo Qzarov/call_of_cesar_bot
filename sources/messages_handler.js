@@ -1,13 +1,13 @@
 import { text } from "./consts/text.js"
 import { pictures, audio } from "./consts/media.js"
 import { callbackData } from "./consts/callbackData.js"
+import { BotUtils } from "./botUtils.js"
 
-import fs from "fs";
 
 
 export class MessagesHandler {
     constructor(bot, db) {
-        this.bot = bot;
+        this.bot = new BotUtils(bot);
         this.db = db;
     }
 
@@ -64,7 +64,7 @@ export class MessagesHandler {
                 {text: `Назад`, callback_data: callbackData.BACK_TO_START}
             ]
         ]
-        this.editReplyMarkupAndCaption(chatId, messageId, buttons, text.ABOUT_EPOS)
+        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons, text.ABOUT_EPOS)
     }
 
     answerAboutZovDobra(chatId, messageId) {
@@ -80,7 +80,7 @@ export class MessagesHandler {
                 {text: `Назад`, callback_data: callbackData.BACK_TO_START}
             ]
         ]
-        this.editReplyMarkupAndCaption(chatId, messageId, buttons, text.ABOUT_ZOV_DOBRA)
+        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons, text.ABOUT_ZOV_DOBRA)
     }
 
     answerTableOfContents(chatId, messageId) {
@@ -109,19 +109,19 @@ export class MessagesHandler {
                 {text: `Назад`, callback_data: callbackData.BACK_TO_START}
             ]
         ]
-        this.editReplyMarkupAndCaption(chatId, messageId, buttons, text.TABLE_OF_CONTENTS_TEXT)
+        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons, text.TABLE_OF_CONTENTS_TEXT)
     }
 
     answerInlineBackToStart(chatId, messageId) {
-        this.editReplyMarkupAndCaption(chatId, messageId, this.start_menu_buttons, text.START_TEXT)
+        this.bot.editReplyMarkupAndCaption(chatId, messageId, this.start_menu_buttons, text.START_TEXT)
     }
 
     answerInlineBackToStartHard(chatId, messageId) {
-        this.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, this.start_menu_buttons, text.START_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, this.start_menu_buttons, text.START_TEXT)
     }
 
     answerInlineStartQuest(chatId, messageId) {
-        this.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, this.quest_started_buttons, text.GREETING_MESSAGE)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, this.quest_started_buttons, text.GREETING_MESSAGE)
     }
 
     answerInlineBecoming(chatId, messageId) {
@@ -133,11 +133,11 @@ export class MessagesHandler {
                 {text: `Назад`, callback_data: callbackData.BACK_TO_QUEST_START},
             ]
         ]
-        this.deleteAndSendAudio(chatId, messageId, audio.BECOMING_AUDIO, buttons, text.BECOMING_AUDIO_MESSAGE)
+        this.bot.deleteAndSendAudio(chatId, messageId, audio.BECOMING_AUDIO, buttons, text.BECOMING_AUDIO_MESSAGE)
     }
 
     answerInlineBackToQuestStart(chatId, messageId) {
-        this.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, this.quest_started_buttons, text.GREETING_MESSAGE)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.START_PIC, this.quest_started_buttons, text.GREETING_MESSAGE)
     }
 
     answerInlinePart1_1(chatId, messageId) {
@@ -145,7 +145,7 @@ export class MessagesHandler {
             callbackData.BACK_TO_QUEST_START, `Назад`,
             callbackData.GESAR_PART1_2_1, `Далее`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART1_1_PIC, buttons, text.PART1_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART1_1_PIC, buttons, text.PART1_1_TEXT)
     }
 
     answerInlinePart1_2_1(chatId, messageId) {
@@ -153,7 +153,7 @@ export class MessagesHandler {
             callbackData.BACK_TO_QUEST_START, `Назад`,
             callbackData.GESAR_PART1_2_2, `Далее`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART1_2_PIC, buttons, text.PART1_2_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART1_2_PIC, buttons, text.PART1_2_1_TEXT)
     }
 
     answerInlinePart1_2_2(chatId, messageId) {
@@ -161,7 +161,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART1_2_1, `Назад`,
             callbackData.GESAR_PART1_3, `Что сделали небожители?`
         )
-        this.editReplyMarkupAndCaption(chatId, messageId, buttons, text.PART1_2_2_TEXT)
+        this.bot.editReplyMarkupAndCaption(chatId, messageId, buttons, text.PART1_2_2_TEXT)
     }
 
     answerInlinePart1_3(chatId, messageId) {
@@ -169,7 +169,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART1_2_1, `Назад`,
             callbackData.GESAR_PART1_TEST_0, `Вперед!`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART1_3_PIC, buttons, text.PART1_3_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART1_3_PIC, buttons, text.PART1_3_TEXT)
     }
 
     answerInlinePart1_TEST_0(chatId, messageId) {
@@ -179,7 +179,7 @@ export class MessagesHandler {
         )
         const caption = "_Давай проверим твою внимательность. Ответь на два вопроса " +
             "по Ветви 1._"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart1_TEST_1(chatId, messageId) {
@@ -194,15 +194,15 @@ export class MessagesHandler {
             ]
         ]
         const caption = "_Кем был главный герой, до того, как спустился на землю?_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart1_TEST_no(callback_d) {
-        this.answerCallback(callback_d, text.text.TEST_QUERY_no)
+        this.bot.answerCallback(callback_d, text.text.TEST_QUERY_no)
     }
 
     answerInlinePart1_TEST_1_yes(callback_d, chatId, messageId) {
-        this.answerCallback(callback_d, text.text.TEST_QUERY_yes)
+        this.bot.answerCallback(callback_d, text.text.TEST_QUERY_yes)
 
         const buttons = [
             [
@@ -212,7 +212,7 @@ export class MessagesHandler {
         const caption =
             "_Главный герой Гэсэр действительно был богатырем, который спустился " +
             "на землю, чтобы спасти людей от злых сил._"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart1_TEST_2(chatId, messageId) {
@@ -228,11 +228,11 @@ export class MessagesHandler {
         ]
         const caption = "_Как звали верховного Тэнгрия, отца всех богов?_"
 
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart1_TEST_2_yes(callbackId, chatId, messageId) {
-        this.answerCallback(callbackId, text.text.TEST_QUERY_yes)
+        this.bot.answerCallback(callbackId, text.text.TEST_QUERY_yes)
 
         const buttons = [
             [
@@ -247,7 +247,7 @@ export class MessagesHandler {
             ],
         ]
         const caption = "_Отлично! Испытание по Ветви 1 пройдено, продолжай Путь Героя!_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart2_1_1(chatId, messageId) {
@@ -255,7 +255,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART1_TEST_0, `Назад`,
             callbackData.GESAR_PART2_1_2, `Что было дальше?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART2_1_PIC, buttons, text.PART2_1_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART2_1_PIC, buttons, text.PART2_1_1_TEXT)
     }
 
     answerInlinePart2_1_2(chatId, messageId) {
@@ -263,7 +263,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART2_1_1, `Назад`,
             callbackData.GESAR_PART2_2_1, `В гости к Саргалу`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART2_1_PIC, buttons, text.PART2_1_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART2_1_PIC, buttons, text.PART2_1_2_TEXT)
     }
 
     answerInlinePart2_2_1(chatId, messageId) {
@@ -271,7 +271,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART2_1_2, `Назад`,
             callbackData.GESAR_PART2_2_2, `На состязания!`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART2_2_PIC, buttons, text.PART2_2_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART2_2_PIC, buttons, text.PART2_2_1_TEXT)
     }
 
     answerInlinePart2_2_2(chatId, messageId) {
@@ -279,7 +279,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART2_2_1, `Назад`,
             callbackData.GESAR_PART2_3_1, `За второй женой!`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART2_2_PIC, buttons, text.PART2_2_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART2_2_PIC, buttons, text.PART2_2_2_TEXT)
     }
 
     answerInlinePart2_3_1(chatId, messageId) {
@@ -287,7 +287,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART2_2_2, `Назад`,
             callbackData.GESAR_PART2_3_2, `Тэнгрии услышали?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART2_3_PIC, buttons, text.PART2_3_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART2_3_PIC, buttons, text.PART2_3_1_TEXT)
     }
 
     answerInlinePart2_3_2(chatId, messageId) {
@@ -295,7 +295,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART2_3_1, `Назад`,
             callbackData.GESAR_PART2_4_1, `Что потом сделал Гэсэр?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART2_3_PIC, buttons, text.PART2_3_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART2_3_PIC, buttons, text.PART2_3_2_TEXT)
     }
 
     answerInlinePart2_4_1(chatId, messageId) {
@@ -303,7 +303,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART2_3_2, `Назад`,
             callbackData.GESAR_PART2_4_2, `Третья жена?!`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART2_4_PIC, buttons, text.PART2_4_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART2_4_PIC, buttons, text.PART2_4_1_TEXT)
     }
 
     answerInlinePart2_4_2(chatId, messageId) {
@@ -311,7 +311,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART2_4_1, `Назад`,
             callbackData.GESAR_PART2_TEST_0, `Тоже хочу дворец...`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART2_4_PIC, buttons, text.PART2_4_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART2_4_PIC, buttons, text.PART2_4_2_TEXT)
     }
 
     answerInlinePart2_TEST_0(chatId, messageId) {
@@ -320,7 +320,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART2_TEST_1, `Первый вопрос`
         )
         const caption = "_На этом вторая ветвь подходит к концу, пора переходить к вопросам!_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart2_TEST_1(chatId, messageId) {
@@ -335,15 +335,15 @@ export class MessagesHandler {
             ]
         ]
         const caption = "_Почему небесного богатыря Бухэ-Бэлигтэ, будущего Гэсэра, прозвали в детстве Нюсата-Нюргай?_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart2_TEST_no(callbackId) {
-        this.answerCallback(callbackId, text.text.TEST_QUERY_no)
+        this.bot.answerCallback(callbackId, text.text.TEST_QUERY_no)
     }
 
     answerInlinePart2_TEST_1_yes(callback_d, chatId, messageId) {
-        this.answerCallback(callback_d, text.text.TEST_QUERY_yes)
+        this.bot.answerCallback(callback_d, text.text.TEST_QUERY_yes)
 
         const buttons = [
             [
@@ -352,7 +352,7 @@ export class MessagesHandler {
         ]
         const caption =
             "_Это правда, богатырь Гэсэр в детстве был сопливым мальчиком!_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart2_TEST_2(chatId, messageId) {
@@ -369,11 +369,11 @@ export class MessagesHandler {
         const caption = "_Для чего Нюсата-Нюргай получил на горе Сумбэр имя Гэсэр?_" +
             "\n" +
             "Подсказка: _«Если внимателен ты был путник, то историю эту услышать ты должен был…»_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart2_TEST_2_yes(callback_d, chatId, messageId) {
-        this.answerCallback(callback_d, text.TEST_QUERY_yes)
+        this.bot.answerCallback(callback_d, text.TEST_QUERY_yes)
 
         const buttons = [
             [
@@ -386,7 +386,7 @@ export class MessagesHandler {
         ]
         const caption =
             "_Отлично! Вместе с богатырём Гэсэром вы прошли испытание по Ветви 2, так держать!_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart3_1_1(chatId, messageId) {
@@ -394,7 +394,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART2_TEST_0, `Назад`,
             callbackData.GESAR_PART3_1_2, `Что было дальше?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART3_1_PIC, buttons, text.PART3_1_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART3_1_PIC, buttons, text.PART3_1_1_TEXT)
     }
 
     answerInlinePart3_1_2(chatId, messageId) {
@@ -402,7 +402,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART3_1_1, `Назад`,
             callbackData.GESAR_PART3_2_1, `На совет Тэнгриев`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART3_1_PIC, buttons, text.PART3_1_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART3_1_PIC, buttons, text.PART3_1_2_TEXT)
     }
 
     answerInlinePart3_2_1(chatId, messageId) {
@@ -410,7 +410,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART3_1_2, `Назад`,
             callbackData.GESAR_PART3_2_2, `Подлый Архан!`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART3_2_PIC, buttons, text.PART3_2_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART3_2_PIC, buttons, text.PART3_2_1_TEXT)
     }
 
     answerInlinePart3_2_2(chatId, messageId) {
@@ -418,7 +418,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART3_2_1, `Назад`,
             callbackData.GESAR_PART3_3_1, `Что стало с Арханом?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART3_2_PIC, buttons, text.PART3_2_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART3_2_PIC, buttons, text.PART3_2_2_TEXT)
     }
 
     answerInlinePart3_3_1(chatId, messageId) {
@@ -426,7 +426,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART3_2_2, `Назад`,
             callbackData.GESAR_PART3_3_2, `Что сделал Архан-Шудхэр?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART3_3_PIC, buttons, text.PART3_3_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART3_3_PIC, buttons, text.PART3_3_1_TEXT)
     }
 
     answerInlinePart3_3_2(chatId, messageId) {
@@ -434,7 +434,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART3_3_1, `Назад`,
             callbackData.GESAR_PART3_3_3, `У них получилось?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART3_3_PIC, buttons, text.PART3_3_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART3_3_PIC, buttons, text.PART3_3_2_TEXT)
     }
 
     answerInlinePart3_3_3(chatId, messageId) {
@@ -442,7 +442,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART3_3_2, `Назад`,
             callbackData.GESAR_PART3_TEST_0, `Вот это история...`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART3_3_PIC, buttons, text.PART3_3_3_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART3_3_PIC, buttons, text.PART3_3_3_TEXT)
     }
 
     answerInlinePart3_TEST_0(chatId, messageId) {
@@ -451,7 +451,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART3_TEST_1, `Первый вопрос`
         )
         const caption = "_Вот мы и дошли до конца третьей ветви. Теперь традиционные вопросы!_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart3_TEST_1(chatId, messageId) {
@@ -466,15 +466,15 @@ export class MessagesHandler {
             ]
         ]
         const caption = "_Из какой части тела Атай-Улана появился злобный демон Архан-Шудхэр?_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart3_TEST_no(callbackId) {
-        this.answerCallback(callbackId, text.TEST_QUERY_no)
+        this.bot.answerCallback(callbackId, text.TEST_QUERY_no)
     }
 
     answerInlinePart3_TEST_1_yes(callbackId, chatId, messageId) {
-        this.answerCallback(callbackId, text.TEST_QUERY_yes)
+        this.bot.answerCallback(callbackId, text.TEST_QUERY_yes)
 
         const buttons = [
             [
@@ -483,7 +483,7 @@ export class MessagesHandler {
         ]
         const caption =
             "_Да! Демон Архан-Шудхэр появился из головы Атай-Улана!_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart3_TEST_2(chatId, messageId) {
@@ -498,11 +498,11 @@ export class MessagesHandler {
             ]
         ]
         const caption = "_Почему дядя Гэсэра Хара-Зутан пошел на предательство и сговор с Архан-Шудхэром?_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart3_TEST_2_yes(callbackId, chatId, messageId) {
-        this.answerCallback(callbackId, text.TEST_QUERY_yes)
+        this.bot.answerCallback(callbackId, text.TEST_QUERY_yes)
 
         const buttons = this.getStoryButtons(
             callbackData.GESAR_PART3_TEST_0, `Назад`,
@@ -510,7 +510,7 @@ export class MessagesHandler {
         )
         const caption =
             "_Бок о бок с Гэсэром вы прошли уже три ветви! Но приключения только начинаются!_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart4_1_1(chatId, messageId) {
@@ -518,7 +518,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART3_TEST_0, `Назад`,
             callbackData.GESAR_PART4_1_2, `Что было дальше?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART4_1_PIC, buttons, text.PART4_1_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART4_1_PIC, buttons, text.PART4_1_1_TEXT)
     }
 
     answerInlinePart4_1_2(chatId, messageId) {
@@ -526,7 +526,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART4_1_1, `Назад`,
             callbackData.GESAR_PART4_2_1, `Они отправились в поход?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART4_1_PIC, buttons, text.PART4_1_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART4_1_PIC, buttons, text.PART4_1_2_TEXT)
     }
 
     answerInlinePart4_2_1(chatId, messageId) {
@@ -534,7 +534,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART4_1_2, `Назад`,
             callbackData.GESAR_PART4_2_2, `Началось сражение?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART4_2_PIC, buttons, text.PART4_2_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART4_2_PIC, buttons, text.PART4_2_1_TEXT)
     }
 
     answerInlinePart4_2_2(chatId, messageId) {
@@ -542,7 +542,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART4_2_1, `Назад`,
             callbackData.GESAR_PART4_3_1, `Гал-Нурман сдался?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART4_2_PIC, buttons, text.PART4_2_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART4_2_PIC, buttons, text.PART4_2_2_TEXT)
     }
 
     answerInlinePart4_3_1(chatId, messageId) {
@@ -550,7 +550,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART4_2_2, `Назад`,
             callbackData.GESAR_PART4_3_2, `Неужели он проиграл?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART4_3_PIC, buttons, text.PART4_3_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART4_3_PIC, buttons, text.PART4_3_1_TEXT)
     }
 
     answerInlinePart4_3_2(chatId, messageId) {
@@ -558,7 +558,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART4_3_1, `Назад`,
             callbackData.GESAR_PART4_4_1, `Они успели помочь?`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART4_3_PIC, buttons, text.PART4_3_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART4_3_PIC, buttons, text.PART4_3_2_TEXT)
     }
 
     answerInlinePart4_4_1(chatId, messageId) {
@@ -566,7 +566,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART4_3_2, `Назад`,
             callbackData.GESAR_PART4_4_2, `Победа!`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART4_4_PIC, buttons, text.PART4_4_1_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART4_4_PIC, buttons, text.PART4_4_1_TEXT)
     }
 
     answerInlinePart4_4_2(chatId, messageId) {
@@ -574,7 +574,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART4_4_1, `Назад`,
             callbackData.GESAR_PART4_TEST_0, `Дальше!`
         )
-        this.deleteAndSendPhoto(chatId, messageId, pictures.PART4_4_PIC, buttons, text.PART4_4_2_TEXT)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.PART4_4_PIC, buttons, text.PART4_4_2_TEXT)
     }
 
     answerInlinePart4_TEST_0(chatId, messageId) {
@@ -583,7 +583,7 @@ export class MessagesHandler {
             callbackData.GESAR_PART4_TEST_1, `Первый вопрос`
         )
         const caption = "_Вот мы и дошли до конца четвертой ветви. Теперь традиционные вопросы!_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart4_TEST_1(chatId, messageId) {
@@ -598,15 +598,15 @@ export class MessagesHandler {
             ]
         ]
         const caption = "_Сколько превращений было в распоряжении Гал-Нурман Хана?_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart4_TEST_no(callbackId) {
-        this.answerCallback(callbackId, text.TEST_QUERY_no)
+        this.bot.answerCallback(callbackId, text.TEST_QUERY_no)
     }
 
     answerInlinePart4_TEST_1_yes(callbackId, chatId, messageId) {
-        this.answerCallback(callbackId, text.TEST_QUERY_yes)
+        this.bot.answerCallback(callbackId, text.TEST_QUERY_yes)
 
         const buttons = [
             [
@@ -615,7 +615,7 @@ export class MessagesHandler {
         ]
         const caption =
             "_Абсолютно точно! В распоряжении Гал-Нурмана  было десять тысяч коварств, три тысячи превращений и тридцать три тысячи разрушений._"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart4_TEST_2(chatId, messageId) {
@@ -630,11 +630,11 @@ export class MessagesHandler {
             ]
         ]
         const caption = "_Из какого материала был сделан камень, которым Заса-Мэргэн подбил Гал-Нурмана с небес?_"
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
     answerInlinePart4_TEST_2_yes(callbackId, chatId, messageId) {
-        this.answerCallback(callbackId, text.TEST_QUERY_yes)
+        this.bot.answerCallback(callbackId, text.TEST_QUERY_yes)
 
         const buttons = this.getStoryButtons(
             callbackData.GESAR_PART4_TEST_0, `Назад`,
@@ -642,7 +642,7 @@ export class MessagesHandler {
         )
         const caption =
             "Правильно! На этом четвертая Ветвь приключений Гэсэра заканчивается."
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, caption)
     }
 
 
@@ -657,13 +657,13 @@ export class MessagesHandler {
                 {text: `В главное меню`, callback_data: callbackData.BACK_TO_START_HARD},
             ]
         ]
-        this.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, text.QUEST_END)
+        this.bot.deleteAndSendPhoto(chatId, messageId, pictures.ARSALAN_FRONT, buttons, text.QUEST_END)
     }
 
     answerInlineAddKarma(callback_d, chat_id, karma) {
         this.addKarma(chat_id, karma)
         let answer = `Мы начислили тебе ${karma} Karma. \n\n`;
-        this.bot.answerCallbackQuery(callback_d, {text: answer}).then(r => r)
+        this.bot.bot.answerCallbackQuery(callback_d, {text: answer}).then(r => r)
     }
 
 
@@ -685,72 +685,6 @@ export class MessagesHandler {
                 this.main_menu_button
             ]
         ]
-    }
-
-    sendPhoto(chatId, photo_path, buttons, caption) {
-        const photo = fs.createReadStream(photo_path)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: caption,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
-    }
-
-    deleteAndSendPhoto(chatId, messageId, photo_path, buttons, caption) {
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
-
-        const photo = fs.createReadStream(photo_path)
-        this.bot.sendPhoto(chatId, photo, {
-            caption: caption,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
-    }
-
-    deleteAndSendAudio(chatId, messageId, audio_path, buttons, caption) {
-        this.bot.deleteMessage(chatId, messageId).then(r => r)
-
-        const audio = fs.createReadStream(audio_path)
-        this.bot.sendAudio(chatId, audio, {
-            caption: caption,
-            parse_mode: `Markdown`,
-            reply_markup: {
-                inline_keyboard: buttons
-            }
-        }).then(r => r)
-    }
-
-    editReplyMarkupOnly(chatId, messageId, buttons) {
-        const reply_markup = {
-            inline_keyboard: buttons
-        }
-        const message_id_spec = {
-            chat_id: chatId,
-            message_id: messageId
-        }
-        this.bot.editMessageReplyMarkup(reply_markup, message_id_spec).then(r => r)
-    }
-
-    editReplyMarkupAndCaption(chatId, messageId, buttons, caption) {
-        const reply_markup = {
-            inline_keyboard: buttons
-        }
-        const message_id_spec = {
-            parse_mode: `Markdown`,
-            chat_id: chatId,
-            message_id: messageId
-        }
-
-        this.bot.editMessageReplyMarkup(reply_markup, message_id_spec).then(r => r)
-        this.bot.editMessageCaption(caption, message_id_spec).then(r => r)
-    }
-
-    answerCallback(callbackId, message) {
-        this.bot.answerCallbackQuery(callbackId, {text: message}).then(r => r)
     }
 
     writeLog(file, message) {

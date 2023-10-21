@@ -1,7 +1,7 @@
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
-import {DataBase} from './sources/db.js'
-import {MessagesHandler} from './sources/messages_handler.js'
+import { DataBase } from './sources/db.js'
+import { MessagesHandler } from './sources/messages_handler.js'
 import { callbackData } from "./sources/consts/callbackData.js"
 dotenv.config()
 

@@ -11,19 +11,15 @@ export class Chapter1Handler {
         if (qry.length >= 1) {
             switch (qry[0]) {
                 case "1":
-                    console.log(`Chapter1Handler.handleCallbackQuery.answerInlinePart1`)
                     this.answerInlinePart1(qry.slice(1), params)
                     break
                 case "2":
-                    console.log(`Chapter1Handler.handleCallbackQuery.answerInlinePart2`)
                     this.answerInlinePart2(qry.slice(1), params)
                     break
                 case "3":
-                    console.log(`Chapter1Handler.handleCallbackQuery.answerInlinePart3`)
                     this.answerInlinePart3(qry.slice(1), params)
                     break
                 case "test":
-                    console.log(`Chapter1Handler.handleCallbackQuery.answerInlineTest`)
                     this.answerInlineTest(qry.slice(1), params)
                     break
             }
@@ -31,7 +27,6 @@ export class Chapter1Handler {
     }
 
     answerInlinePart1(qry, params) {
-        console.log(`Chapter1Handler.answerInlinePart1:`, JSON.stringify(qry), JSON.stringify(params))
         let answerData = {
             buttons: getStoryButtons(callbackData.BACK_TO_QUEST_START, `Назад`, callbackData.GESAR_PART1_2_1, `Далее`),
             picture: pictures.PART1_1_PIC,
@@ -41,7 +36,6 @@ export class Chapter1Handler {
     }
 
     answerInlinePart2(qry, params) {
-        console.log(`Chapter1Handler.answerInlinePart2:`, JSON.stringify(qry), JSON.stringify(params))
         let answerData = {}
 
         if (qry[0] === "1") {
@@ -61,8 +55,6 @@ export class Chapter1Handler {
     }
 
     answerInlinePart3(qry, params) {
-        console.log(`Chapter1Handler.answerInlinePart3:`, JSON.stringify(qry), JSON.stringify(params))
-
         const answerData = {
             buttons: getStoryButtons(callbackData.GESAR_PART1_2_2, `Назад`, callbackData.GESAR_PART1_TEST_0, `Далее`),
             picture: pictures.PART1_3_PIC,

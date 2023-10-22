@@ -125,63 +125,6 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
                 tgMsgHandler.answerInlineBackToQuestStart(sender.id, opts.message_id)
                 break
 
-            case callbackData.GESAR_PART4_1_1:
-                tgMsgHandler.answerInlinePart4_1_1(sender.id, opts.message_id)
-                // tgMsgHandler.answerInlineQuestEnd(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_1_2:
-                tgMsgHandler.answerInlinePart4_1_2(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_2_1:
-                tgMsgHandler.answerInlinePart4_2_1(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_2_2:
-                tgMsgHandler.answerInlinePart4_2_2(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_3_1:
-                tgMsgHandler.answerInlinePart4_3_1(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_3_2:
-                tgMsgHandler.answerInlinePart4_3_2(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_4_1:
-                tgMsgHandler.answerInlinePart4_4_1(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_4_2:
-                tgMsgHandler.answerInlinePart4_4_2(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_TEST_0:
-                tgMsgHandler.answerInlinePart4_TEST_0(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_TEST_1:
-                tgMsgHandler.answerInlinePart4_TEST_1(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_TEST_no:
-                tgMsgHandler.answerInlinePart4_TEST_no(sender.callback_id)
-                break
-
-            case callbackData.GESAR_PART4_TEST_1_yes:
-                tgMsgHandler.answerInlinePart4_TEST_1_yes(sender.callback_id, sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_TEST_2:
-                tgMsgHandler.answerInlinePart4_TEST_2(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART4_TEST_2_yes:
-                tgMsgHandler.answerInlinePart4_TEST_2_yes(sender.callback_id, sender.id, opts.message_id)
-                break
-
             case callbackData.QUEST_END:
                 tgMsgHandler.answerInlineQuestEnd(sender.id, opts.message_id)
                 break

@@ -4,9 +4,9 @@ import { pictures } from "../consts/media.js"
 import { callbackData } from "../consts/callbackData.js"
 import { getStoryButtons, getTestButtons } from "./utils.js"
 
-export class Chapter2Handler {
+export class Chapter4Handler {
     handleCallbackQuery(qry, params) {
-        console.log(`Chapter1Handler.handleCallbackQuery:`, JSON.stringify(qry))
+        console.log(`Chapter4Handler.handleCallbackQuery:`, JSON.stringify(qry))
         if (qry.length >= 1) {
             switch (qry[0]) {
                 case "1":
@@ -29,92 +29,104 @@ export class Chapter2Handler {
     }
 
     answerInlinePart1(qry, params) {
-        console.log(`Chapter2Handler.answerInlinePart1:`, JSON.stringify(qry), JSON.stringify(params))
+        console.log(`Chapter4Handler.answerInlinePart1:`, JSON.stringify(qry), JSON.stringify(params))
         let answerData = {}
 
         if (qry[0] === "1") {
             answerData = {
-                buttons: getStoryButtons(callbackData.GESAR_PART1_TEST_0, `Назад`, callbackData.GESAR_PART2_1_2, `Что было дальше?`),
-                picture: pictures.PART2_1_PIC,
-                text: text.PART2_1_1_TEXT
+                buttons: getStoryButtons(
+                    callbackData.GESAR_PART3_TEST_0, `Назад`,
+                    callbackData.GESAR_PART4_1_2, `Что было дальше?`
+                ),
+                picture: pictures.PART4_1_PIC,
+                text: text.PART4_1_1_TEXT
             }
         } else if (qry[0] === "2") {
             answerData = {
-                buttons: getStoryButtons(callbackData.GESAR_PART2_1_1, `Назад`, callbackData.GESAR_PART2_2_1, `В гости к Саргалу`),
-                picture: pictures.PART2_1_PIC,
-                text: text.PART2_1_2_TEXT
+                buttons: getStoryButtons(
+                    callbackData.GESAR_PART4_1_1, `Назад`,
+                    callbackData.GESAR_PART4_2_1, `Они отправились в поход?`
+                ),
+                picture: pictures.PART4_1_PIC,
+                text: text.PART4_1_2_TEXT
             }
         }
         botUtils.deleteAndSendPhoto(params.chatId, params.messageId, answerData.picture, answerData.buttons, answerData.text)
     }
 
     answerInlinePart2(qry, params) {
-        console.log(`Chapter2Handler.answerInlinePart2:`, JSON.stringify(qry), JSON.stringify(params))
+        console.log(`Chapter4Handler.answerInlinePart2:`, JSON.stringify(qry), JSON.stringify(params))
         let answerData = {}
 
         if (qry[0] === "1") {
             answerData = {
-                buttons: getStoryButtons(callbackData.GESAR_PART2_1_2, `Назад`, callbackData.GESAR_PART2_2_2, `На состязания!`),
-                picture: pictures.PART2_2_PIC,
-                text: text.PART2_2_1_TEXT
+                buttons: getStoryButtons(
+                    callbackData.GESAR_PART4_1_2, `Назад`,
+                    callbackData.GESAR_PART4_2_2, `Началось сражение?`
+                ),
+                picture: pictures.PART4_2_PIC,
+                text: text.PART4_2_1_TEXT
             }
         } else if (qry[0] === "2") {
             answerData = {
-                buttons: getStoryButtons(callbackData.GESAR_PART2_2_1, `Назад`, callbackData.GESAR_PART2_3_1, `За второй женой!`),
-                picture: pictures.PART2_2_PIC,
-                text: text.PART2_2_2_TEXT
+                buttons: getStoryButtons(
+                    callbackData.GESAR_PART4_2_1, `Назад`,
+                    callbackData.GESAR_PART4_3_1, `Гал-Нурман сдался?`
+                ),
+                picture: pictures.PART4_2_PIC,
+                text: text.PART4_2_2_TEXT
             }
         }
         botUtils.deleteAndSendPhoto(params.chatId, params.messageId, answerData.picture, answerData.buttons, answerData.text)
     }
 
     answerInlinePart3(qry, params) {
-        console.log(`Chapter2Handler.answerInlinePart3:`, JSON.stringify(qry), JSON.stringify(params))
+        console.log(`Chapter4Handler.answerInlinePart3:`, JSON.stringify(qry), JSON.stringify(params))
         let answerData = {}
 
         if (qry[0] === "1") {
             answerData = {
                 buttons: getStoryButtons(
-                        callbackData.GESAR_PART2_2_2, `Назад`, 
-                        callbackData.GESAR_PART2_3_2, `Тэнгрии услышали?`
+                        callbackData.GESAR_PART4_2_2, `Назад`,
+                        callbackData.GESAR_PART4_3_2, `Неужели он проиграл?`
                     ),
-                picture: pictures.PART2_3_PIC,
-                text: text.PART2_3_1_TEXT
+                picture: pictures.PART4_3_PIC,
+                text: text.PART4_3_1_TEXT
             }
         } else if (qry[0] === "2") {
             answerData = {
                 buttons: getStoryButtons(
-                        callbackData.GESAR_PART2_3_1, `Назад`, 
-                        callbackData.GESAR_PART2_4_1, `Что потом сделал Гэсэр?`
+                        callbackData.GESAR_PART4_3_1, `Назад`,
+                        callbackData.GESAR_PART4_4_1, `Они успели помочь?`
                     ),
-                picture: pictures.PART2_3_PIC,
-                text: text.PART2_3_2_TEXT
+                picture: pictures.PART4_3_PIC,
+                text: text.PART4_3_2_TEXT
             }
         }
         botUtils.deleteAndSendPhoto(params.chatId, params.messageId, answerData.picture, answerData.buttons, answerData.text)
     }
 
     answerInlinePart4(qry, params) {
-        console.log(`Chapter2Handler.answerInlinePart3:`, JSON.stringify(qry), JSON.stringify(params))
+        console.log(`Chapter4Handler.answerInlinePart4:`, JSON.stringify(qry), JSON.stringify(params))
         let answerData = {}
 
         if (qry[0] === "1") {
             answerData = {
                 buttons: getStoryButtons(
-                        callbackData.GESAR_PART2_3_2, `Назад`,
-                        callbackData.GESAR_PART2_4_2, `Третья жена?!`
+                        callbackData.GESAR_PART4_3_2, `Назад`,
+                        callbackData.GESAR_PART4_4_2, `Победа!`
                     ),
-                picture: pictures.PART2_4_PIC,
-                text: text.PART2_4_1_TEXT
+                picture: pictures.PART4_4_PIC,
+                text: text.PART4_4_1_TEXT
             }
         } else if (qry[0] === "2") {
             answerData = {
                 buttons: getStoryButtons(
-                        callbackData.GESAR_PART2_4_1, `Назад`,
-                        callbackData.GESAR_PART2_TEST_0, `Тоже хочу дворец...`
+                    callbackData.GESAR_PART4_4_1, `Назад`,
+                    callbackData.GESAR_PART4_TEST_0, `Дальше!`
                     ),
-                picture: pictures.PART2_4_PIC,
-                text: text.PART2_4_2_TEXT
+                picture: pictures.PART4_4_PIC,
+                text: text.PART4_4_2_TEXT
             }
         }
         botUtils.deleteAndSendPhoto(params.chatId, params.messageId, answerData.picture, answerData.buttons, answerData.text)
@@ -140,11 +152,11 @@ export class Chapter2Handler {
     getTest0Data(query) {
         return {
             buttons: getStoryButtons(
-                    callbackData.GESAR_PART2_4_1, `Назад`, 
-                    callbackData.GESAR_PART2_TEST_1, `Первый вопрос`
+                    callbackData.GESAR_PART4_4_2, `Назад`,
+                    callbackData.GESAR_PART4_TEST_1, `Первый вопрос`
                 ),
             picture: pictures.ARSALAN_FRONT,
-            text: "_На этом вторая ветвь подходит к концу, пора переходить к вопросам!_",
+            text: "_Вот мы и дошли до конца четвертой ветви. Теперь традиционные вопросы!_",
         }
     }
 
@@ -152,12 +164,12 @@ export class Chapter2Handler {
         if (query.length === 1) {
             return {
                 buttons: getTestButtons(
-                    `Он родился крепышом`, callbackData.GESAR_PART2_TEST_no,
-                    `В детстве был сопливым`, callbackData.GESAR_PART2_TEST_1_yes,
-                    `Из-за буйного нрава`, callbackData.GESAR_PART2_TEST_no,
-                    `Был красивым`, callbackData.GESAR_PART2_TEST_no,
+                    `10 тысяч`, callbackData.GESAR_PART2_TEST_no,
+                    `33 тысячи`, callbackData.GESAR_PART2_TEST_no,
+                    `3 тысячи`, callbackData.GESAR_PART4_TEST_1_yes,
+                    `200 тысяч`, callbackData.GESAR_PART2_TEST_no,
                 ),
-                text: "_Почему небесного богатыря Бухэ-Бэлигтэ, будущего Гэсэра, прозвали в детстве Нюсата-Нюргай?_",
+                text: "_Сколько превращений было в распоряжении Гал-Нурман Хана?_",
                 picture: pictures.ARSALAN_FRONT
             }
         } else if (query.length === 2) {
@@ -166,10 +178,10 @@ export class Chapter2Handler {
                 return {
                     buttons:[
                         [
-                            {text: `Следующий вопрос`, callback_data: callbackData.GESAR_PART2_TEST_2},
+                            {text: `Следующий вопрос`, callback_data: callbackData.GESAR_PART4_TEST_2},
                         ]
                     ],
-                    text: "_Это правда, богатырь Гэсэр в детстве был сопливым мальчиком!_",
+                    text: "_Абсолютно точно! В распоряжении Гал-Нурмана  было десять тысяч коварств, три тысячи превращений и тридцать три тысячи разрушений._",
                     picture: pictures.ARSALAN_FRONT
                 }
             } else if (query[1] === "no") {}
@@ -180,14 +192,12 @@ export class Chapter2Handler {
         if (query.length === 1) {
             return {
                 buttons: getTestButtons(
-                    `Для величия`, callbackData.GESAR_PART2_TEST_2_yes,
-                    `Для истории`, callbackData.GESAR_PART2_TEST_no,
-                    `Для защиты`, callbackData.GESAR_PART2_TEST_no,
-                    `Для славы`, callbackData.GESAR_PART2_TEST_no,
+                    `метеорит`, callbackData.GESAR_PART2_TEST_no,
+                    `камень`, callbackData.GESAR_PART2_TEST_no,
+                    `золото`, callbackData.GESAR_PART2_TEST_no,
+                    `алмаз`, callbackData.GESAR_PART4_TEST_2_yes,
                 ),
-                text: "_Для чего Нюсата-Нюргай получил на горе Сумбэр имя Гэсэр?_" +
-                    "\n\n" +
-                    "Подсказка: _«Если внимателен ты был путник, то историю эту услышать ты должен был…»_",
+                text: "_Из какого материала был сделан камень, которым Заса-Мэргэн подбил Гал-Нурмана с небес?_",
                 picture: pictures.ARSALAN_FRONT
             }
         } else if (query.length === 2) {
@@ -195,10 +205,10 @@ export class Chapter2Handler {
                 botUtils.answerCallback(params.callbackId, text.TEST_QUERY_yes)
                 return {
                     buttons: getStoryButtons(
-                        callbackData.GESAR_PART2_TEST_0, `Назад`,
-                        callbackData.GESAR_PART3_1_1, `Продолжить приключения! (Ветвь 3)`
+                        callbackData.GESAR_PART4_TEST_0, `Назад`,
+                        callbackData.QUEST_END, `Конец?` // TODO change to chapter5
                     ),
-                    text: "_Отлично! Вместе с богатырём Гэсэром вы прошли испытание по Ветви 2, так держать!_",
+                    text: "Правильно! На этом четвертая Ветвь приключений Гэсэра заканчивается.",
                     picture: pictures.ARSALAN_FRONT
                 }
             } else if (query[1] === "no") {}

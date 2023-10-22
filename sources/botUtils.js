@@ -1,4 +1,8 @@
+import TelegramBot from 'node-telegram-bot-api';
 import fs from "fs";
+import dotenv from 'dotenv';
+dotenv.config()
+
 
 export class BotUtils {
     constructor(bot) {
@@ -71,3 +75,7 @@ export class BotUtils {
         this.bot.answerCallbackQuery(callbackId, {text: message}).then(r => r)
     }
 }
+
+const token = process.env.BOT_TOKEN
+export const bot = new TelegramBot(token, {polling: true});
+export const botUtils = new BotUtils(bot)

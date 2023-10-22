@@ -1,16 +1,9 @@
-import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
-import { DataBase } from './sources/db.js'
-import { MessagesHandler } from './sources/messages_handler.js'
+
+import { bot } from './sources/botUtils.js'
+import { tgMsgHandler } from './sources/messages_handler.js'
 import { callbackData } from "./sources/consts/callbackData.js"
 dotenv.config()
-
-
-const BOT_TOKEN = process.env.BOT_TOKEN;
-
-const db = new DataBase();
-const bot = new TelegramBot(BOT_TOKEN, {polling: true});
-const tgMsgHandler = new MessagesHandler(bot, db)
 
 
 bot.on('message', async (msg) => {
@@ -50,8 +43,6 @@ bot.on('text', async (msg) => {
         await bot.sendMessage(from_user.id, answer)
     }
 
-
-
 });
 
 
@@ -71,7 +62,31 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
         inline_message_id: callbackQuery.inline_message_id
     };
 
-    console.log()
+    const params = {
+        chatId: sender.id,
+        messageId: opts.message_id,
+        callbackId: sender.callback_id
+    }
+
+    try {
+        if (sender.action.indexOf(':') >= 0) {
+            const qry = sender.action.split(':')
+            if (!qry.length) {
+                throw error(`Error: length of callbackQuery.data ${sender.action} invalid`)
+            }
+
+            if (qry[0] === "gesar") {
+                tgMsgHandler.chapterHandler.handleCallbackQuery(qry.slice(1), params)
+            }
+
+
+        }
+    } catch (error) {
+        console.log(`Error: ${error}`)
+    }
+
+
+    console.log(`Got callback_query "${sender.action}" from ${opts.chat_id}`)
     try {
         switch (sender.action) {
             case callbackData.GESAR_EPOS:
@@ -110,46 +125,7 @@ bot.on('callback_query', function onCallbackQuery(callbackQuery) {
                 tgMsgHandler.answerInlineBackToQuestStart(sender.id, opts.message_id)
                 break
 
-            case callbackData.GESAR_PART1_1:
-                tgMsgHandler.answerInlinePart1_1(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART1_2_1:
-                tgMsgHandler.answerInlinePart1_2_1(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART1_2_2:
-                tgMsgHandler.answerInlinePart1_2_2(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART1_3:
-                tgMsgHandler.answerInlinePart1_3(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART1_TEST_0:
-                tgMsgHandler.answerInlinePart1_TEST_0(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART1_TEST_1:
-                tgMsgHandler.answerInlinePart1_TEST_1(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART1_TEST_no:
-                tgMsgHandler.answerInlinePart1_TEST_no(sender.callback_id)
-                break
-
-            case callbackData.GESAR_PART1_TEST_1_yes:
-                tgMsgHandler.answerInlinePart1_TEST_1_yes(sender.callback_id, sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART1_TEST_2:
-                tgMsgHandler.answerInlinePart1_TEST_2(sender.id, opts.message_id)
-                break
-
-            case callbackData.GESAR_PART1_TEST_2_yes:
-                tgMsgHandler.answerInlinePart1_TEST_2_yes(sender.callback_id, sender.id, opts.message_id)
-                break
-
+            // TODO DELETE
             case callbackData.GESAR_PART2_1_1:
                 tgMsgHandler.answerInlinePart2_1_1(sender.id, opts.message_id)
                 break

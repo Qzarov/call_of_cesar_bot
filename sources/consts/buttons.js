@@ -84,7 +84,7 @@ const table_of_contents = [
     ]
 ]
 
-export const buttons = {
+export const constButtons = {
     start_menu_buttons,
     quest_started_buttons,
     main_menu_button,

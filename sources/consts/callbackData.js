@@ -12,16 +12,16 @@ export const callbackData = {
     QUEST_END:              "quest_end",
 
     // PART 1
-    GESAR_PART1_1:          "gesar_part1_1",
-    GESAR_PART1_2_1:        "gesar_part1_2_1",
-    GESAR_PART1_2_2:        "gesar_part1_2_2",
-    GESAR_PART1_3:          "gesar_part1_3",
-    GESAR_PART1_TEST_0:     "gesar_part1_test_0",
-    GESAR_PART1_TEST_1:     "gesar_part1_test_1",
-    GESAR_PART1_TEST_no:    "gesar_part1_test_no",
-    GESAR_PART1_TEST_1_yes: "gesar_part1_test_1_yes",
-    GESAR_PART1_TEST_2:     "gesar_part1_test_2",
-    GESAR_PART1_TEST_2_yes: "gesar_part1_test_2_yes",
+    GESAR_PART1_1:          "gesar:part1:1",
+    GESAR_PART1_2_1:        "gesar:part1:2:1",
+    GESAR_PART1_2_2:        "gesar:part1:2:2",
+    GESAR_PART1_3:          "gesar:part1:3",
+    GESAR_PART1_TEST_0:     "gesar:part1:test:0",
+    GESAR_PART1_TEST_1:     "gesar:part1:test:1",
+    GESAR_PART1_TEST_no:    "gesar:part1:test:no",
+    GESAR_PART1_TEST_1_yes: "gesar:part1:test:1:yes",
+    GESAR_PART1_TEST_2:     "gesar:part1:test:2",
+    GESAR_PART1_TEST_2_yes: "gesar:part1:test:2:yes",
 
     // PART 2
     GESAR_PART2_1_1:        "gesar_part2_1_1",

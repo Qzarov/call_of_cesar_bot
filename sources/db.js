@@ -1,7 +1,7 @@
 import sqlite3 from 'sqlite3';
 sqlite3.verbose()
 
-export class DataBase {
+class DataBase {
     constructor() {
         this.db = new sqlite3.Database('./data/quest.db',(err) => {
             if (err) {
@@ -98,3 +98,5 @@ export class DataBase {
     }
 
 }
+
+export const db = new DataBase()

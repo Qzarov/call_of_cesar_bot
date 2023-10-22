@@ -2,8 +2,7 @@ import { botUtils } from '../botUtils.js'
 import { text } from "../consts/text.js"
 import { pictures } from "../consts/media.js"
 import { callbackData } from "../consts/callbackData.js"
-import { getStoryButtons } from "./utils.js"
-import { constButtons } from "../consts/buttons.js"
+import { getStoryButtons, getTestButtons } from "./utils.js"
 
 export class Chapter2Handler {
     handleCallbackQuery(qry, params) {
@@ -152,16 +151,12 @@ export class Chapter2Handler {
     getTest1Data(query, params) {
         if (query.length === 1) {
             return {
-                buttons: [
-                    [
-                        {text: `Он родился крепышом`, callback_data: callbackData.GESAR_PART2_TEST_no},
-                        {text: `В детстве был сопливым`, callback_data: callbackData.GESAR_PART2_TEST_1_yes},
-                    ],
-                    [
-                        {text: `Из-за буйного нрава`, callback_data: callbackData.GESAR_PART2_TEST_no},
-                        {text: `Был красивым`, callback_data: callbackData.GESAR_PART2_TEST_no},
-                    ]
-                ],
+                buttons: getTestButtons(
+                    `Он родился крепышом`, callbackData.GESAR_PART2_TEST_no,
+                    `В детстве был сопливым`, callbackData.GESAR_PART2_TEST_1_yes,
+                    `Из-за буйного нрава`, callbackData.GESAR_PART2_TEST_no,
+                    `Был красивым`, callbackData.GESAR_PART2_TEST_no,
+                ),
                 text: "_Почему небесного богатыря Бухэ-Бэлигтэ, будущего Гэсэра, прозвали в детстве Нюсата-Нюргай?_",
                 picture: pictures.ARSALAN_FRONT
             }
@@ -184,16 +179,12 @@ export class Chapter2Handler {
     getTest2Data(query, params) {
         if (query.length === 1) {
             return {
-                buttons: [
-                    [
-                        {text: `Для величия`, callback_data: callbackData.GESAR_PART2_TEST_2_yes},
-                        {text: `Для истории`, callback_data: callbackData.GESAR_PART2_TEST_no},
-                    ],
-                    [
-                        {text: `Для защиты`, callback_data: callbackData.GESAR_PART2_TEST_no},
-                        {text: `Для славы`, callback_data: callbackData.GESAR_PART2_TEST_no},
-                    ]
-                ],
+                buttons: getTestButtons(
+                    `Для величия`, callbackData.GESAR_PART2_TEST_2_yes,
+                    `Для истории`, callbackData.GESAR_PART2_TEST_no,
+                    `Для защиты`, callbackData.GESAR_PART2_TEST_no,
+                    `Для славы`, callbackData.GESAR_PART2_TEST_no,
+                ),
                 text: "_Для чего Нюсата-Нюргай получил на горе Сумбэр имя Гэсэр?_" +
                     "\n\n" +
                     "Подсказка: _«Если внимателен ты был путник, то историю эту услышать ты должен был…»_",
@@ -203,15 +194,10 @@ export class Chapter2Handler {
             if (query[1] === "yes") {
                 botUtils.answerCallback(params.callbackId, text.TEST_QUERY_yes)
                 return {
-                    buttons:[
-                        [
-                            {text: `Продолжить приключения! (Ветвь 3)`, callback_data: callbackData.GESAR_PART3_1_1},
-                        ],
-                        [
-                            {text: `Назад`, callback_data: callbackData.GESAR_PART2_TEST_0},
-                            constButtons.main_menu_button
-                        ]
-                    ],
+                    buttons: getStoryButtons(
+                        callbackData.GESAR_PART2_TEST_0, `Назад`,
+                        callbackData.GESAR_PART3_1_1, `Продолжить приключения! (Ветвь 3)`
+                    ),
                     text: "_Отлично! Вместе с богатырём Гэсэром вы прошли испытание по Ветви 2, так держать!_",
                     picture: pictures.ARSALAN_FRONT
                 }

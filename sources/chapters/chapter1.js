@@ -2,7 +2,7 @@ import { botUtils } from '../botUtils.js'
 import { text } from "../consts/text.js"
 import { pictures } from "../consts/media.js"
 import { callbackData } from "../consts/callbackData.js"
-import { getStoryButtons } from "./utils.js"
+import { getStoryButtons, getTestButtons } from "./utils.js"
 import { constButtons } from "../consts/buttons.js"
 
 export class Chapter1Handler {
@@ -91,16 +91,12 @@ export class Chapter1Handler {
     getTest1Data(query, params) {
         if (query.length === 1) {
             return {
-                buttons: [
-                    [
-                        {text: `Крестьянином`, callback_data: callbackData.GESAR_PART1_TEST_no},
-                        {text: `Волшебником`, callback_data: callbackData.GESAR_PART1_TEST_no},
-                    ],
-                    [
-                        {text: `Богатырем`, callback_data: callbackData.GESAR_PART1_TEST_1_yes},
-                        {text: `Князем`, callback_data: callbackData.GESAR_PART1_TEST_no},
-                    ]
-                ],
+                buttons: getTestButtons(
+                    `Крестьянином`, callbackData.GESAR_PART1_TEST_no,
+                    `Волшебником`, callbackData.GESAR_PART1_TEST_no,
+                    `Богатырем`, callbackData.GESAR_PART1_TEST_1_yes,
+                    `Князем`, callbackData.GESAR_PART1_TEST_no,
+                ),
                 text: "_Кем был главный герой, до того, как спустился на землю?_",
                 picture: pictures.ARSALAN_FRONT
             }
@@ -123,16 +119,12 @@ export class Chapter1Handler {
     getTest2Data(query, params) {
         if (query.length === 1) {
             return {
-                buttons: [
-                    [
-                        {text: `Хан-Хурмас`, callback_data: callbackData.GESAR_PART1_TEST_no},
-                        {text: `Эсэгэ-Малан`, callback_data: callbackData.GESAR_PART1_TEST_2_yes},
-                    ],
-                    [
-                        {text: `Бухэ-Бэлигтэ`, callback_data: callbackData.GESAR_PART1_TEST_no},
-                        {text: `Атай-Улан`, callback_data: callbackData.GESAR_PART1_TEST_no},
-                    ]
-                ],
+                buttons: getTestButtons(
+                    `Хан-Хурмас`, callbackData.GESAR_PART1_TEST_no,
+                    `Эсэгэ-Малан`, callbackData.GESAR_PART1_TEST_2_yes,
+                    `Бухэ-Бэлигтэ`, callbackData.GESAR_PART1_TEST_no,
+                    `Атай-Улан`, callbackData.GESAR_PART1_TEST_no,
+                ),
                 text: "_Как звали верховного Тэнгрия, отца всех богов?_",
                 picture: pictures.ARSALAN_FRONT,
             }
@@ -140,7 +132,7 @@ export class Chapter1Handler {
             if (query[1] === "yes") {
                 botUtils.answerCallback(params.callbackId, text.TEST_QUERY_yes)
                 return {
-                    buttons:[
+                    buttons: [
                         [
                             {text: `Навстречу приключениям! (Ветвь 2)`, callback_data: callbackData.GESAR_PART2_1_1},
                         ],

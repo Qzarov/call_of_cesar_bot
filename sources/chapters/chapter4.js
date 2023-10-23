@@ -164,10 +164,10 @@ export class Chapter4Handler {
         if (query.length === 1) {
             return {
                 buttons: getTestButtons(
-                    `10 тысяч`, callbackData.GESAR_PART2_TEST_no,
-                    `33 тысячи`, callbackData.GESAR_PART2_TEST_no,
+                    `10 тысяч`, callbackData.GESAR_PART4_TEST_no,
+                    `33 тысячи`, callbackData.GESAR_PART4_TEST_no,
                     `3 тысячи`, callbackData.GESAR_PART4_TEST_1_yes,
-                    `200 тысяч`, callbackData.GESAR_PART2_TEST_no,
+                    `200 тысяч`, callbackData.GESAR_PART4_TEST_no,
                 ),
                 text: "_Сколько превращений было в распоряжении Гал-Нурман Хана?_",
                 picture: pictures.ARSALAN_FRONT
@@ -181,7 +181,7 @@ export class Chapter4Handler {
                             {text: `Следующий вопрос`, callback_data: callbackData.GESAR_PART4_TEST_2},
                         ]
                     ],
-                    text: "_Абсолютно точно! В распоряжении Гал-Нурмана  было десять тысяч коварств, три тысячи превращений и тридцать три тысячи разрушений._",
+                    text: "_Абсолютно точно! В распоряжении Гал-Нурмана было десять тысяч коварств, три тысячи превращений и тридцать три тысячи разрушений._",
                     picture: pictures.ARSALAN_FRONT
                 }
             } else if (query[1] === "no") {}
@@ -192,9 +192,9 @@ export class Chapter4Handler {
         if (query.length === 1) {
             return {
                 buttons: getTestButtons(
-                    `метеорит`, callbackData.GESAR_PART2_TEST_no,
-                    `камень`, callbackData.GESAR_PART2_TEST_no,
-                    `золото`, callbackData.GESAR_PART2_TEST_no,
+                    `метеорит`, callbackData.GESAR_PART4_TEST_no,
+                    `камень`, callbackData.GESAR_PART4_TEST_no,
+                    `золото`, callbackData.GESAR_PART4_TEST_no,
                     `алмаз`, callbackData.GESAR_PART4_TEST_2_yes,
                 ),
                 text: "_Из какого материала был сделан камень, которым Заса-Мэргэн подбил Гал-Нурмана с небес?_",
@@ -206,7 +206,7 @@ export class Chapter4Handler {
                 return {
                     buttons: getStoryButtons(
                         callbackData.GESAR_PART4_TEST_0, `Назад`,
-                        callbackData.QUEST_END, `Конец?` // TODO change to chapter5
+                        callbackData.GESAR_PART5_1_1, `Ветвь 5`
                     ),
                     text: "Правильно! На этом четвертая Ветвь приключений Гэсэра заканчивается.",
                     picture: pictures.ARSALAN_FRONT

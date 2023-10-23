@@ -2,13 +2,14 @@ import { Chapter1Handler } from "./chapter1.js"
 import { Chapter2Handler } from "./chapter2.js"
 import { Chapter3Handler } from "./chapter3.js"
 import { Chapter4Handler } from "./chapter4.js"
+import { Chapter5Handler } from "./chapter5.js"
 
 const chapters = {
     chapter1: "part1",
     chapter2: "part2",
     chapter3: "part3",
     chapter4: "part4",
-    // chapter5: "part5",
+    chapter5: "part5",
     // chapter6: "part6",
     // chapter7: "part7",
     // chapter8: "part8",
@@ -21,6 +22,7 @@ export class ChaptersHandler {
         this.chapter2 = new Chapter2Handler()
         this.chapter3 = new Chapter3Handler()
         this.chapter4 = new Chapter4Handler()
+        this.chapter5 = new Chapter5Handler()
     }
 
     handleCallbackQuery(qry, params) {
@@ -38,6 +40,9 @@ export class ChaptersHandler {
                     break
                 case chapters.chapter4:
                     this.chapter4.handleCallbackQuery(qry.slice(1), params)
+                    break
+                case chapters.chapter5:
+                    this.chapter5.handleCallbackQuery(qry.slice(1), params)
                     break
             }
         }

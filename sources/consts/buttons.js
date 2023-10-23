@@ -69,7 +69,7 @@ const table_of_contents = [
     ],
     [
         {text: `Ветвь 5`, callback_data: callbackData.GESAR_PART5_1_1},
-        {text: `Ветвь 6`, url: "https://telegra.ph/Vetv-shestaya-Gehsehr-ubivaet-chudovishche-SHehrehm-Minata-07-18"},
+        {text: `Ветвь 6`, callback_data: callbackData.GESAR_PART6_1_1},
     ],
     [
         {text: `Ветвь 7`, url: "https://telegra.ph/Vetv-sedmaya-Kak-Gehsehr-pobedil-dyavola-Abarga-Sehsehna-07-18"},

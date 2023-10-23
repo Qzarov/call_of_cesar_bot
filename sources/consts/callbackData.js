@@ -84,4 +84,17 @@ export const callbackData = {
     GESAR_PART5_TEST_2:     "gesar:part5:test:2",
     GESAR_PART5_TEST_2_yes: "gesar:part5:test:2:yes",
 
+    // PART 6
+    GESAR_PART6_1_1:        "gesar:part6:1:1",
+    GESAR_PART6_1_2:        "gesar:part6:1:2",
+    GESAR_PART6_2_1:        "gesar:part6:2:1",
+    GESAR_PART6_2_2:        "gesar:part6:2:2",
+    GESAR_PART6_3_1:        "gesar:part6:3:1",
+    GESAR_PART6_3_2:        "gesar:part6:3:2",
+    GESAR_PART6_TEST_0:     "gesar:part6:test:0",
+    GESAR_PART6_TEST_1:     "gesar:part6:test:1",
+    GESAR_PART6_TEST_no:    "gesar:part6:test:no",
+    GESAR_PART6_TEST_1_yes: "gesar:part6:test:1:yes",
+    GESAR_PART6_TEST_2:     "gesar:part6:test:2",
+    GESAR_PART6_TEST_2_yes: "gesar:part6:test:2:yes",
 }

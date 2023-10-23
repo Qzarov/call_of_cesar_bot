@@ -15,9 +15,12 @@ export const pictures = {
     PART4_2_PIC:  "./data/pic_part4_2.jpg",
     PART4_3_PIC:  "./data/pic_part4_3.jpg",
     PART4_4_PIC:  "./data/pic_part4_4.jpg",
-    PART5_1_PIC:  "./data/pic_part4_4.jpg",
-    PART5_2_PIC:  "./data/pic_part4_4.jpg",
-    PART5_3_PIC:  "./data/pic_part4_4.jpg",
+    PART5_1_PIC:  "./data/pic_part5_1.jpg",
+    PART5_2_PIC:  "./data/pic_part5_2.jpg",
+    PART5_3_PIC:  "./data/pic_part5_3.jpg",
+    PART6_1_PIC:  "./data/pic_part6_1.jpg",
+    PART6_2_PIC:  "./data/pic_part6_2.jpg",
+    PART6_3_PIC:  "./data/pic_part6_3.jpg",
     ARSALAN_FRONT:  "./data/arsalan_front.png",
 }
 

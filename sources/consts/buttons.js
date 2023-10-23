@@ -73,7 +73,7 @@ const table_of_contents = [
     ],
     [
         {text: `Ветвь 7`, callback_data: callbackData.GESAR_PART7_1_1},
-        {text: `Ветвь 8`, callback_data: callbackData.GESAR_PART7_1_1},
+        {text: `Ветвь 8`, callback_data: callbackData.GESAR_PART8_1_1},
 
     ],
     [

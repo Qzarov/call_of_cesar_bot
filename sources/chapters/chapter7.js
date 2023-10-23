@@ -224,7 +224,7 @@ export class Chapter7Handler {
                 return {
                     buttons: getStoryButtons(
                         callbackData.GESAR_PART7_TEST_0, `Назад`,
-                        callbackData.GESAR_PART8_1_1, `Продолжить приключения! (Ветвь 3)`
+                        callbackData.GESAR_PART8_1_1, `Продолжить приключения! (Ветвь 8)`
                     ),
                     text: "_Вы прошли испытание по Ветви 7, скоро новое приключение!_",
                     picture: pictures.ARSALAN_FRONT

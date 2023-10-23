@@ -32,6 +32,11 @@ export const pictures = {
     PART7_3_PIC:  "./data/pic_part7_3.jpg",
     PART7_4_PIC:  "./data/pic_part7_4.jpg",
 
+    PART8_1_PIC:  "./data/pic_part8_1.jpg",
+    PART8_2_PIC:  "./data/pic_part8_2.jpg",
+    PART8_3_PIC:  "./data/pic_part8_3.jpg",
+    PART8_4_PIC:  "./data/pic_part8_4.jpg",
+
     ARSALAN_FRONT:  "./data/arsalan_front.png",
 }
 

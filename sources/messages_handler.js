@@ -65,7 +65,7 @@ class MessagesHandler {
                 {text: `Песня о Гэсэре`, url: "https://www.youtube.com/watch?v=uBJpeLkFKJ8"},
             ],
             [
-                {text: `Назад`, callback_data: callbackData.GESAR_PART3_TEST_2_yes},
+                {text: `Назад`, callback_data: callbackData.GESAR_PART8_TEST_0},
                 {text: `В главное меню`, callback_data: callbackData.BACK_TO_START_HARD},
             ]
         ]
